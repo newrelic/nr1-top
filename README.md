@@ -6,7 +6,10 @@ on that host.j
 
 Author: Lew Cirne
 
-## Getting started
+## Screenshot
+![Screenshot](./screenshots/main.png)
+
+## Running Locally
 
 Run the following scripts:
 
