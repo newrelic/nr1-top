@@ -15,7 +15,8 @@ export default class TopNerdlet extends React.Component {
       return (
         <EntityByIdQuery entityId={entityId}>
           {({loading, error, data}) => {      
-            const entity = data && data.actor && data.actor.entities && data.actor.entities[0]
+            if(loading) return <Spinner/>
+            const entity = data.actor.entities[0]
             return entity ? <Top entity={entity}/> : <Spinner/>
           }}
         </EntityByIdQuery>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, StackItem, LineChart, AreaChart, ChartGroup, NrqlQuery, BlockText, Button } from 'nr1';
+import { Stack, StackItem, LineChart, AreaChart, ChartGroup, NrqlQuery, BlockText, Button, Spinner } from 'nr1';
 
 
 
@@ -7,8 +7,7 @@ export default class ProcessDetails extends React.PureComponent {
 
   metricQuery(select, suffix = "TIMESERIES") {
     const { entity, pid } = this.props
-    return `SELECT ${select} FROM ProcessSample WHERE entityGuid='${entity.id}' AND processId=${pid}
-      SINCE 30 minutes ago ${suffix}`
+    return `SELECT ${select} FROM ProcessSample WHERE entityGuid='${entity.id}' AND processId=${pid} ${suffix}`
   }
 
   renderProcessLink(pid) {
@@ -46,21 +45,26 @@ export default class ProcessDetails extends React.PureComponent {
 
   renderSummaryPanel() {
     const { entity } = this.props
-    const select = ['commandLine', 'commandName', 'apmApplicationIds', 'parentProcessId'].
+    const select = ['commandLine', 'commandName', 'parentProcessId'].
       map(s => `latest(${s})`).join(', ')
     const nrql = this.metricQuery(select, '')
     return <NrqlQuery accountId={entity.accountId} query={nrql} formatType='raw'>
       {({ loading, data }) => {
-        if (loading) return <StackItem/>
+        if (loading) return null
         const { results } = data
-        const parentPid = `${results[3].latest}`
+        if(!results || results.length == 0) return null
+
+        const commandLine = results.shift().latest,
+              commandName = results.shift().latest,
+              parentPid = results.shift().latest
+
         return (<>
           <StackItem>
-            <h2>{results[1].latest}</h2>
+            <h2>{commandName}</h2>
           </StackItem>
           <StackItem>
             <BlockText>
-              <code>{results[0].latest}</code>
+              <code>{commandLine}</code>
             </BlockText>
           </StackItem>
           <StackItem>
