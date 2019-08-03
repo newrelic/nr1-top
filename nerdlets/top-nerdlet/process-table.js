@@ -41,17 +41,11 @@ export default class ProcessTable extends React.PureComponent {
     super(props)
 
     this.state = { sortBy: 'cpu' }
-    this.selectRow = this.selectRow.bind(this)
-  }
-
-  selectRow(row) {
-    this.setState({selectedPid: row.pid})
-    this.props.selectPid(row.pid)
   }
 
   render() {
-    let { sortBy, selectedPid } = this.state
-    const { entity } = this.props
+    let {entity, selectedPid} = this.props
+    const {sortBy} = this.state
 
     // select all of the metrics, but ensure that the first thing we select is the sorted column,
     // since NRQL sorts on the first function in FACET queries.
@@ -78,7 +72,7 @@ export default class ProcessTable extends React.PureComponent {
           })
 
           if(!selectedPid) {
-            this.selectRow(tableData[0])
+            this.props.onSelectPid(tableData[0].pid)
             selectedPid = tableData[0].pid
           }
 
@@ -94,7 +88,7 @@ export default class ProcessTable extends React.PureComponent {
             <tbody>
               {tableData.map(row => {
                 const selected = (selectedPid == row.pid) ? 'selected' : ''
-                return <tr key={row.pid} className={selected} onClick={() => this.selectRow(row)}>
+                return <tr key={row.pid} className={selected} onClick={() => this.props.onSelectPid(row.pid)}>
                   <td className="left">{row.pid}</td>
                   {COLUMNS.map(column => {
                     return <td className={column.align || 'right'} key={column.id}>{row[column.id]}</td>
