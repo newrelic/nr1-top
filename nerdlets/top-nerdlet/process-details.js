@@ -51,7 +51,7 @@ export default class ProcessDetails extends React.PureComponent {
     const nrql = this.metricQuery(select, '')
     return <NrqlQuery accountId={entity.accountId} query={nrql} formatType='raw'>
       {({ loading, data }) => {
-        if (loading) return ""
+        if (loading) return <StackItem/>
         const { results } = data
         const parentPid = `${results[3].latest}`
         return (<>
