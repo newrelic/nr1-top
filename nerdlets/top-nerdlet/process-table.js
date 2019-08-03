@@ -1,5 +1,5 @@
 import React from 'react';
-import { NrqlQuery } from 'nr1';
+import { NrqlQuery, Spinner } from 'nr1';
 
 import bytesToSize from '../common/bytes-to-size'
 
@@ -43,9 +43,9 @@ export default class ProcessTable extends React.PureComponent {
     this.state = { sortBy: 'cpu' }
   }
 
-  render() {
-    let {entity, selectedPid} = this.props
-    const {sortBy} = this.state
+  async componentDidMount() {
+    let { entity, selectedPid } = this.props
+    const { sortBy } = this.state
 
     // select all of the metrics, but ensure that the first thing we select is the sorted column,
     // since NRQL sorts on the first function in FACET queries.
@@ -54,52 +54,55 @@ export default class ProcessTable extends React.PureComponent {
     ].concat(COLUMNS).map(m => m.fn).join(', ')
 
     const nrql = `SELECT ${select} FROM ProcessSample WHERE entityGuid = '${entity.id}' FACET processId LIMIT 50`
-    return (
-      <NrqlQuery accountId={entity.accountId} query={nrql} formatType='raw'>
-        {({ loading, data }) => {
-          if (loading) return ""
-          if (data.facets.length == 0) return "No process data for this host."
-          const tableData = data.facets.map((facet) => {
-            return {
-              pid: facet.name,
-              sort: facet.results[0].average,
-              cpu: `${(facet.results[1].average).toFixed(1)}%`,
-              io: `${bytesToSize(facet.results[2].average)}/s`,
-              res: bytesToSize(facet.results[3].average),
-              virt: bytesToSize(facet.results[4].average),
-              command: facet.results[5].latest,
-            }
-          })
+    const { data } = await NrqlQuery.query({ accountId: entity.accountId, query: nrql, formatType: 'raw' })
+    const { facets } = data.cdsData.raw
+    const tableData = facets.map((facet) => {
+      return {
+        pid: parseInt(facet.name),
+        sort: facet.results[0].average,
+        cpu: `${(facet.results[1].average).toFixed(1)}%`,
+        io: `${bytesToSize(facet.results[2].average)}/s`,
+        res: bytesToSize(facet.results[3].average),
+        virt: bytesToSize(facet.results[4].average),
+        command: facet.results[5].latest,
+      }
+    })
 
-          if(!selectedPid) {
-            selectedPid = tableData[0].pid
-            this.props.onSelectPid(selectedPid)            
-          }
+    if (tableData.length > 0 && !selectedPid) {
+      this.props.onSelectPid(tableData[0].pid)
+    }
+    this.setState({ tableData })
+  }
 
-          return <table className="process-table">
-            <thead>
-              <tr>
-                <th className="center">PID</th>
-                {COLUMNS.map(column => {
-                  return <th className={column.align || 'center'} key={column.id}>{column.name}</th>
-                })}
-              </tr>
-            </thead>
-            <tbody>
-              {tableData.map(row => {
-                const className = (parseInt(selectedPid) == parseInt(row.pid)) ? 'selected' : ''
-                return <tr key={row.pid} className={className} onClick={() => this.props.onSelectPid(row.pid)}>
-                  <td className="left">{row.pid}</td>
-                  {COLUMNS.map(column => {
-                    return <td className={column.align || 'right'} key={column.id}>{row[column.id]}</td>
-                  })}
-                </tr>
-              })}
-            </tbody>
-          </table>
-        }}
+  render() {
+    const {tableData} = this.state
+    const {selectedPid} = this.props
 
-      </NrqlQuery>
-    )
+    if (!tableData) return <Spinner />
+
+    if (tableData.length == 0) return "No Process Sample data for this host."
+
+    return <table className="process-table">
+      <thead>
+        <tr>
+          <th className="center">PID</th>
+          {COLUMNS.map(column => {
+            return <th className={column.align || 'center'} key={column.id}>{column.name}</th>
+          })}
+        </tr>
+      </thead>
+      <tbody>
+        {tableData.map(row => {
+          const className = (parseInt(selectedPid) == parseInt(row.pid)) ? 'selected' : ''
+          return <tr key={row.pid} className={className} onClick={() => this.props.onSelectPid(row.pid)}>
+            <td className="left">{row.pid}</td>
+            {COLUMNS.map(column => {
+              return <td className={column.align || 'right'} key={column.id}>{row[column.id]}</td>
+            })}
+          </tr>
+        })}
+      </tbody>
+    </table>
+    
   }
 }
