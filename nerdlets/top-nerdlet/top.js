@@ -23,6 +23,7 @@ export default class Top extends React.PureComponent {
 
     return <Grid>
       <GridItem columnSpan={7}>
+        <h1>Top Processes</h1>
         <ProcessTable entity={entity} selectedPid={selectedPid} onSelectPid={this.selectPid}/>
       </GridItem>
       <GridItem columnSpan={5}>

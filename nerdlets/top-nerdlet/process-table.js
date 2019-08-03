@@ -72,8 +72,8 @@ export default class ProcessTable extends React.PureComponent {
           })
 
           if(!selectedPid) {
-            this.props.onSelectPid(tableData[0].pid)
             selectedPid = tableData[0].pid
+            this.props.onSelectPid(selectedPid)            
           }
 
           return <table className="process-table">
@@ -87,8 +87,8 @@ export default class ProcessTable extends React.PureComponent {
             </thead>
             <tbody>
               {tableData.map(row => {
-                const selected = (selectedPid == row.pid) ? 'selected' : ''
-                return <tr key={row.pid} className={selected} onClick={() => this.props.onSelectPid(row.pid)}>
+                const className = (selectedPid == row.pid) ? 'selected' : ''
+                return <tr key={row.pid} className={className} onClick={() => this.props.onSelectPid(row.pid)}>
                   <td className="left">{row.pid}</td>
                   {COLUMNS.map(column => {
                     return <td className={column.align || 'right'} key={column.id}>{row[column.id]}</td>

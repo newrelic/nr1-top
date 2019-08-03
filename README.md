@@ -2,7 +2,7 @@
 A simple process monitor for New Relic One. 
 
 Select a host, and inspect the CPU, I/O and Memory of all processes running
-on that host.j
+on that host.
 
 Author: Lew Cirne
 
