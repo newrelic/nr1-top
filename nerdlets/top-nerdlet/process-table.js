@@ -53,7 +53,7 @@ export default class ProcessTable extends React.PureComponent {
       METRICS[sortBy],
     ].concat(COLUMNS).map(m => m.fn).join(', ')
 
-    const nrql = `SELECT ${select} FROM ProcessSample WHERE entityGuid = '${entity.id}' FACET processId LIMIT 50`
+    const nrql = `SELECT ${select} FROM ProcessSample WHERE entityGuid = '${entity.guid}' FACET processId LIMIT 50`
     const { data } = await NrqlQuery.query({ accountId: entity.accountId, query: nrql, formatType: 'raw' })
     const { facets } = data.cdsData.raw
     const tableData = facets.map((facet) => {

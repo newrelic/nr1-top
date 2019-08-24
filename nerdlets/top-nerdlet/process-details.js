@@ -1,13 +1,11 @@
 import React from 'react';
-import { Stack, StackItem, LineChart, AreaChart, ChartGroup, NrqlQuery, BlockText, Button, Spinner } from 'nr1';
-
-
+import { Stack, StackItem, LineChart, AreaChart, ChartGroup, NrqlQuery, BlockText, Button } from 'nr1';
 
 export default class ProcessDetails extends React.PureComponent {
 
   metricQuery(select, suffix = "TIMESERIES") {
     const { entity, pid } = this.props
-    return `SELECT ${select} FROM ProcessSample WHERE entityGuid='${entity.id}' AND processId=${pid} ${suffix}`
+    return `SELECT ${select} FROM ProcessSample WHERE entityGuid='${entity.guid}' AND processId=${pid} ${suffix}`
   }
 
   renderProcessLink(pid) {
