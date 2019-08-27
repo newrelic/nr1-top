@@ -1,5 +1,6 @@
 import React from 'react';
 import { NrqlQuery, Spinner } from 'nr1';
+import timePickerNrql from '../common/time-picker-nrql';
 
 import bytesToSize from '../common/bytes-to-size'
 
@@ -44,6 +45,16 @@ export default class ProcessTable extends React.PureComponent {
   }
 
   async componentDidMount() {
+    this.loadProcessData()
+  }
+
+  componentDidUpdate({entity,launcherUrlState}) {
+    if(entity != this.props.entity || launcherUrlState != this.props.launcherUrlState) {
+      this.loadProcessData()
+    }
+  }
+  
+  async loadProcessData() {
     let { entity, selectedPid } = this.props
     const { sortBy } = this.state
 
@@ -53,7 +64,10 @@ export default class ProcessTable extends React.PureComponent {
       METRICS[sortBy],
     ].concat(COLUMNS).map(m => m.fn).join(', ')
 
-    const nrql = `SELECT ${select} FROM ProcessSample WHERE entityGuid = '${entity.guid}' FACET processId LIMIT 50`
+    const nrql = `SELECT ${select} FROM ProcessSample 
+      WHERE entityGuid = '${entity.guid}' OR hostname = '${entity.name}' 
+      FACET processId LIMIT 50
+      ${timePickerNrql(this.props)}`
     const { data } = await NrqlQuery.query({ accountId: entity.accountId, query: nrql, formatType: 'raw' })
     const { facets } = data.cdsData.raw
     const tableData = facets.map((facet) => {

@@ -1,11 +1,13 @@
 import React from 'react';
 import { Stack, StackItem, LineChart, AreaChart, ChartGroup, NrqlQuery, BlockText, Button } from 'nr1';
+import timePickerNrql from '../common/time-picker-nrql';
 
 export default class ProcessDetails extends React.PureComponent {
 
   metricQuery(select, suffix = "TIMESERIES") {
     const { entity, pid } = this.props
-    return `SELECT ${select} FROM ProcessSample WHERE entityGuid='${entity.guid}' AND processId=${pid} ${suffix}`
+    return `SELECT ${select} FROM ProcessSample WHERE entityGuid='${entity.guid}' 
+      AND processId=${pid} ${suffix} ${timePickerNrql(this.props)}`
   }
 
   renderProcessLink(pid) {
