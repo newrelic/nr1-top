@@ -24,6 +24,7 @@ export default class Top extends React.PureComponent {
     return <Grid>
       <GridItem columnSpan={7} className="column">
         <h1>Top Processes</h1>
+        <p className="subtitle">Refreshes every 15 seconds</p>
         <ProcessTable entity={entity} selectedPid={selectedPid} onSelectPid={this.selectPid} {...this.props}/>
       </GridItem>
       <GridItem columnSpan={5} className="column">
