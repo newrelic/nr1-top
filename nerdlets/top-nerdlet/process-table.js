@@ -1,6 +1,5 @@
 import React from 'react';
 import { NrqlQuery, Spinner } from 'nr1';
-import timePickerNrql from '../common/time-picker-nrql';
 
 import bytesToSize from '../common/bytes-to-size'
 
@@ -8,22 +7,22 @@ const METRICS = {
   cpu: {
     id: 'cpu',
     name: "CPU",
-    fn: "average(cpuPercent) AS cpu"
+    fn: "latest(cpuPercent) AS cpu"
   },
   io: {
     id: 'io',
     name: "I/O",
-    fn: "average(ioReadBytesPerSecond+ioWriteBytesPerSecond) as io"
+    fn: "latest(ioReadBytesPerSecond+ioWriteBytesPerSecond) as io"
   },
   res: {
     id: 'res',
     name: "Res",
-    fn: "average(memoryResidentSizeBytes) as res"
+    fn: "latest(memoryResidentSizeBytes) as res"
   },
   virt: {
     id: 'virt',
     name: "Virt",
-    fn: "average(memoryVirtualSizeBytes) as virt"
+    fn: "latest(memoryVirtualSizeBytes) as virt"
   },
   command: {
     id: 'command',
@@ -46,6 +45,11 @@ export default class ProcessTable extends React.PureComponent {
 
   async componentDidMount() {
     this.loadProcessData()
+    this.interval = setInterval(() => this.loadProcessData(), 15000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
   }
 
   componentDidUpdate({entity,launcherUrlState}) {
@@ -67,17 +71,18 @@ export default class ProcessTable extends React.PureComponent {
     const nrql = `SELECT ${select} FROM ProcessSample 
       WHERE entityGuid = '${entity.guid}' OR hostname = '${entity.name}' 
       FACET processId LIMIT 50
-      ${timePickerNrql(this.props)}`
+      SINCE ${Math.round(new Date().getTime()/1000) - 60}`
+
     const { data } = await NrqlQuery.query({ accountId: entity.accountId, query: nrql, formatType: 'raw' })
     const { facets } = data.cdsData.raw
     const tableData = facets.map((facet) => {
       return {
         pid: parseInt(facet.name),
-        sort: facet.results[0].average,
-        cpu: `${(facet.results[1].average).toFixed(1)}%`,
-        io: `${bytesToSize(facet.results[2].average)}/s`,
-        res: bytesToSize(facet.results[3].average),
-        virt: bytesToSize(facet.results[4].average),
+        sort: facet.results[0].latest,
+        cpu: `${(facet.results[1].latest).toFixed(1)}%`,
+        io: `${bytesToSize(facet.results[2].latest)}/s`,
+        res: bytesToSize(facet.results[3].latest),
+        virt: bytesToSize(facet.results[4].latest),
         command: facet.results[5].latest,
       }
     })
@@ -109,7 +114,7 @@ export default class ProcessTable extends React.PureComponent {
         {tableData.map(row => {
           const className = (parseInt(selectedPid) == parseInt(row.pid)) ? 'selected' : ''
           return <tr key={row.pid} className={className} onClick={() => this.props.onSelectPid(row.pid)}>
-            <td className="left">{row.pid}</td>
+            <td className="right">{row.pid}</td>
             {COLUMNS.map(column => {
               return <td className={column.align || 'right'} key={column.id}>{row[column.id]}</td>
             })}

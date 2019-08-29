@@ -22,11 +22,11 @@ export default class Top extends React.PureComponent {
     const {selectedPid} = this.state
 
     return <Grid>
-      <GridItem columnSpan={7}>
+      <GridItem columnSpan={7} className="column">
         <h1>Top Processes</h1>
         <ProcessTable entity={entity} selectedPid={selectedPid} onSelectPid={this.selectPid} {...this.props}/>
       </GridItem>
-      <GridItem columnSpan={5}>
+      <GridItem columnSpan={5} className="column">
         {selectedPid ? 
           <ProcessDetails entity={entity} pid={selectedPid} onSelectPid={this.selectPid} {...this.props}/> : 
           <Spinner/>}

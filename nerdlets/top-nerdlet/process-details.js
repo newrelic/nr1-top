@@ -12,11 +12,14 @@ export default class ProcessDetails extends React.PureComponent {
 
   renderProcessLink(pid) {
     if (!pid || pid == "null") {
-      return <StackItem key={pid}><Button disabled sizeType="slim">none</Button></StackItem>
+      return <StackItem key="none">
+        <Button type="plain" disabled sizeType="slim">none</Button>
+      </StackItem>
     }
     return <StackItem key={pid}>
-      <Button sizeType="slim" onClick={() => this.props.onSelectPid(pid)}>
-        {pid}
+      <Button iconType="interface_operations_drag" sizeType="slim" type="plain" 
+        onClick={() => this.props.onSelectPid(pid)}>
+          {pid}
       </Button>
     </StackItem>
   }
@@ -24,7 +27,7 @@ export default class ProcessDetails extends React.PureComponent {
   renderChildProcesses() {
     const { entity, pid } = this.props
     const nrql = `SELECT uniques(processId) FROM ProcessSample 
-      WHERE entityGuid = '${entity.id}' AND parentProcessId = ${pid}`
+      WHERE entityGuid = '${entity.guid}' AND parentProcessId = ${pid}`
 
     return <NrqlQuery accountId={entity.accountId} query={nrql} formatType='raw'>
       {({ loading, data }) => {
@@ -58,13 +61,13 @@ export default class ProcessDetails extends React.PureComponent {
               commandName = results.shift().latest,
               parentPid = results.shift().latest
 
-        return (<>
+        return (<div className="summary-panel">
           <StackItem>
             <h2>{commandName}</h2>
           </StackItem>
           <StackItem>
             <BlockText>
-              <code>{commandLine}</code>
+              Command Line: <code>{commandLine}</code>
             </BlockText>
           </StackItem>
           <StackItem>
@@ -76,7 +79,7 @@ export default class ProcessDetails extends React.PureComponent {
           <StackItem>
             {this.renderChildProcesses()}
           </StackItem>
-        </>)
+        </div>)
       }}
     </NrqlQuery>
   }

@@ -1,3 +1,19 @@
+.column {
+  background-color: white;
+  margin-left: 4px;
+  padding: 6px;
+}
+
+.summary-panel {
+  border-bottom: 2px #eeeeee solid;
+  padding: 4px 8px;
+}
+
+h1 {
+  margin-bottom: 8px;
+  font-size: 21px;
+  font-weight: 400;
+}
 
 table.process-table {
   width: 100%;
@@ -26,14 +42,18 @@ table.process-table {
     }
 
     tr.selected {
-      background-color: #444444;
-      color: #eeeeee;
-      border: 1px solid #888888;
+      border: 1px solid #b3e2ff;
+      padding: -1px;
+    
+      td {
+        background-color: #e9f4fb;
+      }
     }
 
     td {
       padding-left: 2px;
       padding-right: 2px;
+      font-size: 16px;
     }
   }
 
