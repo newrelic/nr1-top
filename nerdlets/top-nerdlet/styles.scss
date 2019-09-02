@@ -33,8 +33,18 @@ table.process-table {
     th {
       padding-left: 2px;
       padding-right: 2px;
+      text-align: center;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
-  }
+
+    .selected {
+      background-color: #222222;
+      color: white;
+    }
+}
 
   tbody {
     font-family: 'Courier New', Courier, monospace;

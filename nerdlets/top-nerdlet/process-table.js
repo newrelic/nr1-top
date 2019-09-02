@@ -1,5 +1,5 @@
 import React from 'react';
-import { NrqlQuery, Spinner } from 'nr1';
+import { NrqlQuery, Spinner, Icon } from 'nr1';
 
 import bytesToSize from '../common/bytes-to-size'
 
@@ -94,7 +94,7 @@ export default class ProcessTable extends React.PureComponent {
   }
 
   render() {
-    const {tableData} = this.state
+    const {tableData, sortBy} = this.state
     const {selectedPid} = this.props
 
     if (!tableData) return <Spinner />
@@ -106,7 +106,19 @@ export default class ProcessTable extends React.PureComponent {
         <tr>
           <th className="center">PID</th>
           {COLUMNS.map(column => {
-            return <th className={column.align || 'center'} key={column.id}>{column.name}</th>
+            const isSelected = sortBy == column.id
+            const className = `{$column.align || 'center'}`
+            return <th className={className} 
+              key={column.id}
+              onClick={() => {
+                  this.setState({sortBy: column.id}, () => this.loadProcessData())
+              }}>
+              {column.name}
+              {isSelected && <Icon 
+                  style={{marginLeft: "6px", color: "#aaaaaa"}} 
+                  sizeType="small" 
+                  type="interface_caret_caret-bottom_weight-bold"/>}
+              </th>
           })}
         </tr>
       </thead>

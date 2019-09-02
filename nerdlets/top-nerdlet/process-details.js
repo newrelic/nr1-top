@@ -103,9 +103,9 @@ export default class ProcessDetails extends React.PureComponent {
           {this.renderChart(LineChart, 'I/O',
             "average(ioReadBytesPerSecond/1024/1024) AS 'Read MB/s', average(ioWriteBytesPerSecond/1024/1024) AS 'Write MB/s'")}
           {this.renderChart(AreaChart, 'Resident Memory',
-            "average(memoryResidentSizeBytes/1024/1024) AS 'Resident (MB)'")}
+            "average(memoryResidentSizeBytes) AS 'Resident'")}
           {this.renderChart(AreaChart, 'Virtual Memory',
-            "average(memoryVirtualSizeBytes/1024/1024) AS 'Virtual (MB)'")}
+            "average(memoryVirtualSizeBytes) AS 'Virtual'")}
         </Stack>
       </ChartGroup>
     </div>
