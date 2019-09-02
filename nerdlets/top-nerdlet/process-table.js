@@ -79,7 +79,7 @@ export default class ProcessTable extends React.PureComponent {
       return {
         pid: parseInt(facet.name),
         sort: facet.results[0].latest,
-        cpu: `${(facet.results[1].latest).toFixed(1)}%`,
+        cpu: `${Math.max(facet.results[1].latest, 0).toFixed(1)}%`,
         io: `${bytesToSize(facet.results[2].latest)}/s`,
         res: bytesToSize(facet.results[3].latest),
         virt: bytesToSize(facet.results[4].latest),
@@ -97,7 +97,7 @@ export default class ProcessTable extends React.PureComponent {
     const {tableData, sortBy} = this.state
     const {selectedPid} = this.props
 
-    if (!tableData) return <Spinner />
+    if (!tableData) return <Spinner fillContainer/>
 
     if (tableData.length == 0) return "No Process Sample data for this host."
 
@@ -115,8 +115,8 @@ export default class ProcessTable extends React.PureComponent {
               }}>
               {column.name}
               {isSelected && <Icon 
-                  style={{marginLeft: "6px", color: "#aaaaaa"}} 
-                  sizeType="small" 
+                  style={{marginLeft: "6px" }} 
+                  sizeType="small" color="#aaaaaa"
                   type="interface_caret_caret-bottom_weight-bold"/>}
               </th>
           })}
