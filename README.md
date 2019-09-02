@@ -1,4 +1,4 @@
-# nr1-top-nerdpack
+# nr1-top
 A simple process monitor for New Relic One. 
 
 ## Usage
@@ -23,8 +23,8 @@ New Relic Infrastructure agent deployed on any host you want to monitor.
 Clone this repository and run the following scripts:
 
 ```bash
-git clone https://github.com/newrelic/nr1-top-nerdpack
-cd nr1-top-nerdpack
+git clone https://github.com/newrelic/nr1-top
+cd nr1-top
 npm install
 npm start
 ```
@@ -42,7 +42,7 @@ _Please do not report issues with this software to New Relic Global Technical Su
 
 New Relic hosts and moderates an online forum where customers can interact with New Relic employees as well as other customers to get help and share best practices. Like all official New Relic open source projects, there's a related Community topic in the New Relic Explorer's Hub. You can find this project's topic/threads here:
 
-https://discuss.newrelic.com/c/build-on-new-relic/nr1-top-package
+https://discuss.newrelic.com/c/build-on-new-relic/nr1-top
 *(Note: URL subject to change before GA)*
 
 ## Issues / Enhancement Requests
