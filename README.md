@@ -25,6 +25,7 @@ Clone this repository and run the following scripts:
 ```bash
 git clone https://github.com/newrelic/nr1-top.git
 cd nr1-top
+nr1 nerdpack:uuid -gf
 npm install
 npm start
 ```
