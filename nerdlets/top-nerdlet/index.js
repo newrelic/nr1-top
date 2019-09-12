@@ -1,25 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {EntityByGuidQuery, Spinner} from 'nr1'
+import { EntityByGuidQuery, Spinner } from 'nr1';
 
-import Top from './top'
+import Top from './top';
 
 export default class TopNerdlet extends React.Component {
-    static propTypes = {
-        width: PropTypes.number,
-        height: PropTypes.number,
-    }
+  static propTypes = {
+    width: PropTypes.number,
+    height: PropTypes.number,
+  };
 
-    render() {
-      const {entityGuid} = this.props.nerdletUrlState
-      return (
-        <EntityByGuidQuery entityGuid={entityGuid}>
-          {({loading, error, data}) => {      
-            if(loading) return <div/>
-            const entity = data.actor.entities[0]
-            return entity ? <Top entity={entity} {...this.props}/> : <div/>
-          }}
-        </EntityByGuidQuery>
-      )
-    }
+  render() {
+    const { entityGuid } = this.props.nerdletUrlState;
+    return (
+      <EntityByGuidQuery entityGuid={entityGuid}>
+        {({ loading, error, data }) => {
+          if (loading) return <div />;
+          const entity = data.actor.entities[0];
+          return entity ? <Top entity={entity} {...this.props} /> : <div />;
+        }}
+      </EntityByGuidQuery>
+    );
+  }
 }

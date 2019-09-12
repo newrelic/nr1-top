@@ -1,9 +1,9 @@
 {
-        "uuid": "4775bab8-fa86-487a-964d-c48c568a8cfe",
+  "uuid": "ca3fa44c-79b2-4f52-93f7-e39dd7996f50",
   "private": true,
   "name": "nr1-top",
   "description": "NR1 UI Package nr1-top",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scripts": {
     "start": "nr1 nerdpack:serve",
     "test": "exit 0",
@@ -11,7 +11,8 @@
     "eslint-fix": "eslint nerdlets/ --fix"
   },
   "nr1": {
-    "sdkVersion": 2
+    "sdkVersion": 2,
+    "uuid": "ca3fa44c-79b2-4f52-93f7-e39dd7996f50"
   },
   "dependencies": {
     "prop-types": "^15.6.2",
