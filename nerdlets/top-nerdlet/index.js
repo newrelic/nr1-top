@@ -16,7 +16,7 @@ export default class TopNerdlet extends React.Component {
       <EntityByGuidQuery entityGuid={entityGuid}>
         {({ loading, error, data }) => {
           if (loading) return <div />;
-          const entity = data.actor.entities[0];
+          const entity = data.entities[0];
           return entity ? <Top entity={entity} {...this.props} /> : <div />;
         }}
       </EntityByGuidQuery>
