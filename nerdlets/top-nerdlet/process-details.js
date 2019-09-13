@@ -24,7 +24,7 @@ export default class ProcessDetails extends React.PureComponent {
     if (!pid || pid == 'null') {
       return (
         <StackItem key="none">
-          <Button type="plain" disabled sizeType={Button.SIZE_TYPE.SMALL}>
+          <Button type={Button.TYPE.PLAIN} disabled sizeType={Button.SIZE_TYPE.SMALL}>
             none
           </Button>
         </StackItem>
@@ -35,7 +35,7 @@ export default class ProcessDetails extends React.PureComponent {
         <Button
           iconType={Button.ICON_TYPE.INTERFACE__OPERATIONS__DRAG}
           sizeType={Button.SIZE_TYPE.SMALL}
-          type="plain"
+          type={Button.TYPE.PLAIN}
           onClick={() => this.props.onSelectPid(pid)}
         >
           {pid}
