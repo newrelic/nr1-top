@@ -61,7 +61,7 @@ table.process-table {
     tr.selected {
       border: 1px solid #b3e2ff;
       padding: -1px;
-    
+
       td {
         background-color: #e9f4fb;
       }
@@ -83,12 +83,13 @@ table.process-table {
   .center {
     text-align: center;
   }
-  
+
 }
 
 .process-details {
   padding-right: 8px;
   .chart {
     height: 180px;
+    width: 100%;
   }
 }

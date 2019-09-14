@@ -3,7 +3,7 @@
   "private": true,
   "name": "nr1-top",
   "description": "NR1 UI Package nr1-top",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "scripts": {
     "start": "nr1 nerdpack:serve",
     "test": "exit 0",
@@ -12,7 +12,7 @@
   },
   "nr1": {
     "sdkVersion": 2,
-    "uuid": "ca3fa44c-79b2-4f52-93f7-e39dd7996f50"
+    "uuid": "0e142728-6f42-4e47-8d5b-6e678a044cc3"
   },
   "dependencies": {
     "prop-types": "^15.6.2",

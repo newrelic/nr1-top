@@ -129,7 +129,7 @@ export default class ProcessDetails extends React.PureComponent {
     return (
       <div className="process-details">
         <ChartGroup>
-          <Stack directionType="vertical" alignmentType="fill">
+          <Stack directionType={Stack.DIRECTION_TYPE.VERTICAL} horizontalType={Stack.HORIZONTAL_TYPE.FILL} style={{width:'100%'}}>
             {this.renderSummaryPanel()}
             {this.renderChart(
               AreaChart,
