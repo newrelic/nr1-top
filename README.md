@@ -1,8 +1,8 @@
 # nr1-top
-A simple process monitor for New Relic One. 
+A simple process monitor for New Relic One, similar to the Unix _top_ command. 
 
 ## Usage
-Requires New Relic Infrastructure agent to be delployed on a monitored host.
+Requires [New Relic Infrastructure agent to be delployed](https://docs.newrelic.com/docs/agents/manage-apm-agents/installation/install-agent#infra-install) on a monitored host.
 
 Select a host, and inspect the CPU, I/O and Memory of all processes running
 on that host.
