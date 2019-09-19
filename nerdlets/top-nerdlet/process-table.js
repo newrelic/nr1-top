@@ -86,7 +86,7 @@ export default class ProcessTable extends React.PureComponent {
       query: nrql,
       formatType: 'raw',
     });
-    const { facets } = data.cdsData.raw;
+    const { facets } = data.raw;
     const tableData = facets.map(facet => {
       return {
         pid: parseInt(facet.name),
