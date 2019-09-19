@@ -1,5 +1,5 @@
 # nr1-top
-A simple process monitor for New Relic One, similar to the Unix _top_ command. 
+A simple process monitor for New Relic One, similar to the Unix _top_ command.
 
 ## Usage
 Requires [New Relic Infrastructure agent to be delployed](https://docs.newrelic.com/docs/agents/manage-apm-agents/installation/install-agent#infra-install) on a monitored host.
@@ -23,7 +23,7 @@ New Relic Infrastructure agent deployed on any host you want to monitor.
 Clone this repository and run the following scripts:
 
 ```bash
-git clone https://github.com/newrelic/nr1-top.git
+nr1 nerdpack:clone -r https://github.com/newrelic/nr1-top.git
 cd nr1-top
 nr1 nerdpack:uuid -gf
 npm install
