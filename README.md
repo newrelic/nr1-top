@@ -1,4 +1,7 @@
 # nr1-top
+
+![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/newrelic/nr1-top?include_prereleases) [![Snyk](https://snyk.io/test/github/newrelic/nr1-top/badge.svg)](https://snyk.io/test/github/newrelic/nr1-top)
+
 A simple process monitor for New Relic One, similar to the Unix _top_ command.
 
 ## Usage
