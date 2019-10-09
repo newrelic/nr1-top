@@ -24,7 +24,11 @@ export default class ProcessDetails extends React.PureComponent {
     if (!pid || pid == 'null') {
       return (
         <StackItem key="none">
-          <Button type={Button.TYPE.PLAIN} disabled sizeType={Button.SIZE_TYPE.SMALL}>
+          <Button
+            type={Button.TYPE.PLAIN}
+            disabled
+            sizeType={Button.SIZE_TYPE.SMALL}
+          >
             none
           </Button>
         </StackItem>
@@ -129,7 +133,11 @@ export default class ProcessDetails extends React.PureComponent {
     return (
       <div className="process-details">
         <ChartGroup>
-          <Stack directionType={Stack.DIRECTION_TYPE.VERTICAL} horizontalType={Stack.HORIZONTAL_TYPE.FILL} style={{width:'100%'}}>
+          <Stack
+            directionType={Stack.DIRECTION_TYPE.VERTICAL}
+            horizontalType={Stack.HORIZONTAL_TYPE.FILL}
+            fullWidth
+          >
             {this.renderSummaryPanel()}
             {this.renderChart(
               AreaChart,
