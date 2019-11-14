@@ -378,6 +378,10 @@ jobs:
 
     steps:
       - command-restore-source
+
+      # Because we aren't caching/restoring the ~/.ssh directory, we run checkout again, as it configures things like "known_hosts" for github.com
+      - checkout
+
       - command-restore-npm
       - command-install-oss-cli
       
