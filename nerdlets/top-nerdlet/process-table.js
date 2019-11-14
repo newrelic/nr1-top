@@ -109,7 +109,7 @@ export default class ProcessTable extends React.PureComponent {
     const { tableData, sortBy } = this.state;
     const { selectedPid } = this.props;
 
-    if (!tableData) return <Spinner/>;
+    if (!tableData) return <Spinner />;
 
     if (tableData.length == 0) return 'No Process Sample data for this host.';
 
