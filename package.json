@@ -3,7 +3,7 @@
   "private": true,
   "name": "nr1-top",
   "description": "NR1 UI Package nr1-top",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "scripts": {
     "start": "nr1 nerdpack:serve",
     "test": "exit 0",
