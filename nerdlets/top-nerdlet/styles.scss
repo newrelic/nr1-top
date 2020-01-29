@@ -1,3 +1,6 @@
+
+@import '~@newrelic/nr1-community/dist/index.css';
+
 .column {
   background-color: white;
   margin-left: 4px;
@@ -92,4 +95,13 @@ table.process-table {
     height: 180px;
     width: 100%;
   }
+}
+
+.empty-state-container {
+  height: 100%;
+  background-color:#fff;
+}
+
+[class*='style_empty-state'] {
+  height: calc(100% - (32px));
 }
