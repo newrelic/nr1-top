@@ -87,9 +87,37 @@ table.process-table {
 }
 
 .process-details {
+  height: 100%;
+  overflow: hidden;
   padding-right: 8px;
+
   .chart {
     height: 180px;
     width: 100%;
   }
+
+  & > [class*='wnd-Stack'] {
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+.process-details-main {
+  height: 100%;
+  overflow: scroll;
+}
+
+.primary-grid {
+  height: 100%;
+  overflow: hidden;
+}
+
+[class*='GridItem'].column {
+  height: 100%;
+  overflow: hidden;
+}
+
+.primary-column-main {
+  height:100%;
+  overflow: scroll;
 }
