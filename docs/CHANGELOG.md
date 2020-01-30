@@ -1,3 +1,10 @@
+# [0.3.0](https://github.com/newrelic/nr1-top/compare/v0.2.1...v0.3.0) (2020-01-30)
+
+
+### Features
+
+* allow columns to scroll independantly ([8e43b92](https://github.com/newrelic/nr1-top/commit/8e43b92546285c14e5d261a8e4770540aa176454)), closes [newrelic/nr1-top#2](https://github.com/newrelic/nr1-top/issues/2)
+
 ## [0.2.1](https://github.com/newrelic/nr1-top/compare/v0.2.0...v0.2.1) (2019-11-14)
 
 
