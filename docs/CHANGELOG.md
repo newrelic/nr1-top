@@ -1,3 +1,10 @@
+# [0.4.0](https://github.com/newrelic/nr1-top/compare/v0.3.0...v0.4.0) (2020-01-30)
+
+
+### Features
+
+* display empty state when nothing loads ([d7847eb](https://github.com/newrelic/nr1-top/commit/d7847ebb22402a1d7a348b716cbfaf1aefb9cf70))
+
 # [0.3.0](https://github.com/newrelic/nr1-top/compare/v0.2.1...v0.3.0) (2020-01-30)
 
 
