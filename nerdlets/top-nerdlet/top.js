@@ -21,18 +21,22 @@ export default class Top extends React.PureComponent {
     const { selectedPid } = this.state;
 
     return (
-      <Grid>
-        <GridItem columnSpan={7} className="column">
-          <h1>Top Processes</h1>
-          <p className="subtitle">Refreshes every 15 seconds</p>
-          <ProcessTable
-            entity={entity}
-            selectedPid={selectedPid}
-            onSelectPid={this.selectPid}
-            {...this.props}
-          />
+      <Grid className="primary-grid">
+        <GridItem columnSpan={7} className="column primary-column">
+          <header className="column-header">
+            <h1>Top Processes</h1>
+            <p className="subtitle">Refreshes every 15 seconds</p>
+          </header>
+          <div className="primary-column-main">
+            <ProcessTable
+              entity={entity}
+              selectedPid={selectedPid}
+              onSelectPid={this.selectPid}
+              {...this.props}
+            />
+          </div>
         </GridItem>
-        <GridItem columnSpan={5} className="column">
+        <GridItem columnSpan={5} className="column secondary-column">
           {selectedPid ? (
             <ProcessDetails
               entity={entity}
