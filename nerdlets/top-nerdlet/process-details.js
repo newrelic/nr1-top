@@ -139,26 +139,28 @@ export default class ProcessDetails extends React.PureComponent {
             fullWidth
           >
             {this.renderSummaryPanel()}
-            {this.renderChart(
-              AreaChart,
-              'CPU',
-              "average(cpuSystemPercent) as 'System CPU %', average(cpuUserPercent) AS 'User CPU %'"
-            )}
-            {this.renderChart(
-              LineChart,
-              'I/O',
-              "average(ioReadBytesPerSecond/1024/1024) AS 'Read MB/s', average(ioWriteBytesPerSecond/1024/1024) AS 'Write MB/s'"
-            )}
-            {this.renderChart(
-              AreaChart,
-              'Resident Memory',
-              "average(memoryResidentSizeBytes) AS 'Resident'"
-            )}
-            {this.renderChart(
-              AreaChart,
-              'Virtual Memory',
-              "average(memoryVirtualSizeBytes) AS 'Virtual'"
-            )}
+            <div className="process-details-main">
+              {this.renderChart(
+                AreaChart,
+                'CPU',
+                "average(cpuSystemPercent) as 'System CPU %', average(cpuUserPercent) AS 'User CPU %'"
+              )}
+              {this.renderChart(
+                LineChart,
+                'I/O',
+                "average(ioReadBytesPerSecond/1024/1024) AS 'Read MB/s', average(ioWriteBytesPerSecond/1024/1024) AS 'Write MB/s'"
+              )}
+              {this.renderChart(
+                AreaChart,
+                'Resident Memory',
+                "average(memoryResidentSizeBytes) AS 'Resident'"
+              )}
+              {this.renderChart(
+                AreaChart,
+                'Virtual Memory',
+                "average(memoryVirtualSizeBytes) AS 'Virtual'"
+              )}
+            </div>
           </Stack>
         </ChartGroup>
       </div>
