@@ -1,9 +1,21 @@
 {
-  "lastUpdated": "Tue Sep 17 2019 10:27:51 GMT-0400 (Eastern Daylight Time)",
+  "lastUpdated": "Thu Jan 30 2020 13:12:53 GMT+0000 (Coordinated Universal Time)",
   "projectName": "nr1-top",
   "projectUrl": "https://github.com/newrelic/nr1-top",
   "includeDev": true,
   "dependencies": {
+    "@newrelic/nr1-community@1.0.0": {
+      "name": "@newrelic/nr1-community",
+      "version": "1.0.0",
+      "range": "^1.0.0",
+      "licenses": "Apache-2.0",
+      "repoUrl": "https://github.com/newrelic/nr1-community",
+      "versionedRepoUrl": "https://github.com/newrelic/nr1-community/tree/v1.0.0",
+      "licenseFile": "node_modules/@newrelic/nr1-community/LICENSE",
+      "licenseUrl": "https://github.com/newrelic/nr1-community/blob/v1.0.0/LICENSE",
+      "licenseTextSource": "file",
+      "publisher": "newrelic"
+    },
     "prop-types@15.7.2": {
       "name": "prop-types",
       "version": "15.7.2",
@@ -39,6 +51,32 @@
     }
   },
   "devDependencies": {
+    "@semantic-release/changelog@3.0.5": {
+      "name": "@semantic-release/changelog",
+      "version": "3.0.5",
+      "range": "^3.0.5",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/semantic-release/changelog",
+      "versionedRepoUrl": "https://github.com/semantic-release/changelog/tree/v3.0.5",
+      "licenseFile": "node_modules/@semantic-release/changelog/LICENSE",
+      "licenseUrl": "https://github.com/semantic-release/changelog/blob/v3.0.5/LICENSE",
+      "licenseTextSource": "file",
+      "publisher": "Pierre Vanduynslager",
+      "url": "https://github.com/pvdlg"
+    },
+    "@semantic-release/git@7.0.18": {
+      "name": "@semantic-release/git",
+      "version": "7.0.18",
+      "range": "^7.0.18",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/semantic-release/git",
+      "versionedRepoUrl": "https://github.com/semantic-release/git/tree/v7.0.18",
+      "licenseFile": "node_modules/@semantic-release/git/LICENSE",
+      "licenseUrl": "https://github.com/semantic-release/git/blob/v7.0.18/LICENSE",
+      "licenseTextSource": "file",
+      "publisher": "Pierre Vanduynslager",
+      "url": "https://github.com/pvdlg"
+    },
     "babel-eslint@10.0.3": {
       "name": "babel-eslint",
       "version": "10.0.3",
