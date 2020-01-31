@@ -1,3 +1,10 @@
+## [0.4.1](https://github.com/newrelic/nr1-top/compare/v0.4.0...v0.4.1) (2020-01-31)
+
+
+### Bug Fixes
+
+* spelling ([#19](https://github.com/newrelic/nr1-top/issues/19)) ([3bf447c](https://github.com/newrelic/nr1-top/commit/3bf447cd8baba42a26d60bf591ff9b561838ee92))
+
 # [0.4.0](https://github.com/newrelic/nr1-top/compare/v0.3.0...v0.4.0) (2020-01-30)
 
 
