@@ -1,20 +1,34 @@
 {
-  "lastUpdated": "Thu Jan 30 2020 13:12:53 GMT+0000 (Coordinated Universal Time)",
+  "lastUpdated": "Wed Feb 19 2020 18:11:47 GMT+0000 (Coordinated Universal Time)",
   "projectName": "nr1-top",
   "projectUrl": "https://github.com/newrelic/nr1-top",
   "includeDev": true,
   "dependencies": {
-    "@newrelic/nr1-community@1.0.0": {
+    "@newrelic/nr1-community@1.0.1": {
       "name": "@newrelic/nr1-community",
-      "version": "1.0.0",
-      "range": "^1.0.0",
+      "version": "1.0.1",
+      "range": "^1.0.1",
       "licenses": "Apache-2.0",
       "repoUrl": "https://github.com/newrelic/nr1-community",
-      "versionedRepoUrl": "https://github.com/newrelic/nr1-community/tree/v1.0.0",
+      "versionedRepoUrl": "https://github.com/newrelic/nr1-community/tree/v1.0.1",
       "licenseFile": "node_modules/@newrelic/nr1-community/LICENSE",
-      "licenseUrl": "https://github.com/newrelic/nr1-community/blob/v1.0.0/LICENSE",
+      "licenseUrl": "https://github.com/newrelic/nr1-community/blob/v1.0.1/LICENSE",
       "licenseTextSource": "file",
       "publisher": "newrelic"
+    },
+    "lodash.get@4.4.2": {
+      "name": "lodash.get",
+      "version": "4.4.2",
+      "range": "^4.4.2",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/lodash/lodash",
+      "versionedRepoUrl": "https://github.com/lodash/lodash/tree/v4.4.2",
+      "licenseFile": "node_modules/lodash.get/LICENSE",
+      "licenseUrl": "https://github.com/lodash/lodash/blob/v4.4.2/LICENSE",
+      "licenseTextSource": "file",
+      "publisher": "John-David Dalton",
+      "email": "john.david.dalton@gmail.com",
+      "url": "http://allyoucanleet.com/"
     },
     "prop-types@15.7.2": {
       "name": "prop-types",
