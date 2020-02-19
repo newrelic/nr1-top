@@ -1,4 +1,3 @@
-
 @import '~@newrelic/nr1-community/dist/index.css';
 
 .column {
@@ -10,6 +9,7 @@
 .summary-panel {
   border-bottom: 2px #eeeeee solid;
   padding: 4px 8px;
+  height: 100px;
 }
 
 .subtitle {
@@ -30,7 +30,7 @@ table.process-table {
   font-size: 14px;
 
   thead {
-    background-color:#222222;
+    background-color: #222222;
     color: white;
 
     th {
@@ -47,7 +47,7 @@ table.process-table {
       background-color: #222222;
       color: white;
     }
-}
+  }
 
   tbody {
     font-family: 'Courier New', Courier, monospace;
@@ -86,12 +86,11 @@ table.process-table {
   .center {
     text-align: center;
   }
-
 }
 
 .empty-state-container {
   height: 100%;
-  background-color:#fff;
+  background-color: #fff;
 }
 
 [class*='style_empty-state'] {
@@ -107,7 +106,7 @@ table.process-table {
     height: 180px;
     width: 100%;
   }
-  
+
   & > [class*='wnd-Stack'] {
     height: 100%;
     overflow: hidden;
@@ -130,6 +129,6 @@ table.process-table {
 }
 
 .primary-column-main {
-  height:100%;
+  height: 100%;
   overflow: scroll;
 }

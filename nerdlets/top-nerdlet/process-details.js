@@ -8,16 +8,40 @@ import {
   NrqlQuery,
   BlockText,
   Button,
+  Spinner,
+  NerdGraphQuery,
 } from 'nr1';
-import timePickerNrql from '../common/time-picker-nrql';
+import { NerdGraphError, timeRangeToNrql } from '@newrelic/nr1-community';
+import get from 'lodash.get';
 
 export default class ProcessDetails extends React.PureComponent {
   metricQuery(select, suffix = 'TIMESERIES') {
-    const { entity, pid } = this.props;
+    const { entity, pid, launcherUrlState } = this.props;
     return `SELECT ${select} FROM ProcessSample WHERE entityGuid='${
       entity.guid
-    }'
-      AND processId=${pid} ${suffix} ${timePickerNrql(this.props)}`;
+    }' AND processId=${pid} ${suffix} ${timeRangeToNrql({
+      timeRange: launcherUrlState.timeRange,
+    })}`;
+  }
+
+  summaryPanelQuery(select) {
+    const { entity, pid, launcherUrlState } = this.props;
+
+    const nrql = `SELECT ${select} FROM ProcessSample WHERE entityGuid='${
+      entity.guid
+    }' AND processId=${pid} ${timeRangeToNrql({
+      timeRange: launcherUrlState.timeRange,
+    })}`;
+
+    return `{
+      actor {
+        account(id: ${entity.accountId}) {
+          nrql(query: "${nrql}") {
+            results
+          }
+        }
+      }
+    }`;
   }
 
   renderProcessLink(pid) {
@@ -64,7 +88,7 @@ export default class ProcessDetails extends React.PureComponent {
           if (members.length == 0) members.push(null);
 
           return (
-            <Stack alignmentType="center">
+            <Stack verticalType={Stack.VERTICAL_TYPE.CENTER}>
               <StackItem>Child Processes: </StackItem>
               {members.map(pid => this.renderProcessLink(pid))}
             </Stack>
@@ -77,19 +101,48 @@ export default class ProcessDetails extends React.PureComponent {
   renderSummaryPanel() {
     const { entity } = this.props;
     const select = ['commandLine', 'commandName', 'parentProcessId']
-      .map(s => `latest(${s})`)
+      .map(s => `latest(${s}) as ${s}`)
       .join(', ');
-    const nrql = this.metricQuery(select, '');
-    return (
-      <NrqlQuery accountId={entity.accountId} query={nrql} formatType="raw">
-        {({ loading, data }) => {
-          if (loading) return null;
-          const { results } = data;
-          if (!results || results.length == 0) return null;
+    const nrql = this.summaryPanelQuery(select);
 
-          const commandLine = results.shift().latest,
-            commandName = results.shift().latest,
-            parentPid = results.shift().latest;
+    return (
+      <NerdGraphQuery query={nrql}>
+        {({ loading, error, data }) => {
+          if (loading) {
+            return <Spinner fillContainer />;
+          }
+
+          // GraphQL Error -- pass through the error to default NerdGraphError component
+          if (error || !data.actor.account.nrql) {
+            console.debug('Bad NRQL Query: ' + nrql + ': ');
+            return (
+              <div style={{ marginBottom: '10px' }}>
+                <NerdGraphError error={error} />
+              </div>
+            );
+          }
+
+          const results = get(data, 'actor.account.nrql.results[0]');
+
+          // Failed to get results for whatever reason - show friendly message to user
+          if (!results) {
+            return (
+              <div style={{ marginBottom: '10px' }}>
+                <NerdGraphError
+                  showDetails={false}
+                  error={{
+                    stack: '',
+                    graphQLErrors: '',
+                    message: 'Error: Failed to retrieve process summary',
+                  }}
+                />
+              </div>
+            );
+          }
+
+          const commandLine = results.commandLine,
+            commandName = results.commandName,
+            parentPid = results.parentProcessId;
 
           return (
             <div className="summary-panel">
@@ -102,7 +155,7 @@ export default class ProcessDetails extends React.PureComponent {
                 </BlockText>
               </StackItem>
               <StackItem>
-                <Stack alignmentType="center">
+                <Stack verticalType={Stack.VERTICAL_TYPE.CENTER}>
                   <StackItem>Parent Process: </StackItem>
                   {this.renderProcessLink(parentPid)}
                 </Stack>
@@ -111,7 +164,7 @@ export default class ProcessDetails extends React.PureComponent {
             </div>
           );
         }}
-      </NrqlQuery>
+      </NerdGraphQuery>
     );
   }
 
@@ -132,13 +185,14 @@ export default class ProcessDetails extends React.PureComponent {
   render() {
     return (
       <div className="process-details">
+        {this.renderSummaryPanel()}
+
         <ChartGroup>
           <Stack
             directionType={Stack.DIRECTION_TYPE.VERTICAL}
             horizontalType={Stack.HORIZONTAL_TYPE.FILL}
             fullWidth
           >
-            {this.renderSummaryPanel()}
             <div className="process-details-main">
               {this.renderChart(
                 AreaChart,
