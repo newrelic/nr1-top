@@ -1,10 +1,8 @@
 {
-    "schemaType": "NERDLET",
-    "id": "top-nerdlet",
-    "displayName": "Top",
-    "description": "",
-    "actionCategory": "troubleshoot",
-    "entities": [
-      {"domain": "INFRA", "type": "HOST"}
-  ]
+  "schemaType": "NERDLET",
+  "id": "top-nerdlet",
+  "displayName": "Top",
+  "description": "",
+  "actionCategory": "troubleshoot",
+  "entities": [{ "domain": "INFRA", "type": "HOST" }]
 }
