@@ -1,3 +1,10 @@
+## [0.4.2](https://github.com/newrelic/nr1-top/compare/v0.4.1...v0.4.2) (2020-02-19)
+
+
+### Bug Fixes
+
+* summary panel nrql query issues (Fixes [#10](https://github.com/newrelic/nr1-top/issues/10)) ([#20](https://github.com/newrelic/nr1-top/issues/20)) ([36bb7b9](https://github.com/newrelic/nr1-top/commit/36bb7b9cdef3aa35ab91cf63d2ab84eda29911d6))
+
 ## [0.4.1](https://github.com/newrelic/nr1-top/compare/v0.4.0...v0.4.1) (2020-01-31)
 
 
