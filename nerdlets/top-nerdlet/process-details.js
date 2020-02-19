@@ -11,24 +11,27 @@ import {
   Spinner,
   NerdGraphQuery,
 } from 'nr1';
-import timePickerNrql from '../common/time-picker-nrql';
-import { NerdGraphError } from '@newrelic/nr1-community';
+import { NerdGraphError, timeRangeToNrql } from '@newrelic/nr1-community';
 import get from 'lodash.get';
 
 export default class ProcessDetails extends React.PureComponent {
   metricQuery(select, suffix = 'TIMESERIES') {
-    const { entity, pid } = this.props;
+    const { entity, pid, launcherUrlState } = this.props;
     return `SELECT ${select} FROM ProcessSample WHERE entityGuid='${
       entity.guid
-    }' AND processId=${pid} ${suffix} ${timePickerNrql(this.props)}`;
+    }' AND processId=${pid} ${suffix} ${timeRangeToNrql({
+      timeRange: launcherUrlState.timeRange,
+    })}`;
   }
 
   summaryPanelQuery(select) {
-    const { entity, pid } = this.props;
+    const { entity, pid, launcherUrlState } = this.props;
 
     const nrql = `SELECT ${select} FROM ProcessSample WHERE entityGuid='${
       entity.guid
-    }' AND processId=${pid} ${timePickerNrql(this.props)}`;
+    }' AND processId=${pid} ${timeRangeToNrql({
+      timeRange: launcherUrlState.timeRange,
+    })}`;
 
     return `{
       actor {
@@ -106,7 +109,7 @@ export default class ProcessDetails extends React.PureComponent {
       <NerdGraphQuery query={nrql}>
         {({ loading, error, data }) => {
           if (loading) {
-            return <Spinner style={{ height: '110px' }} />;
+            return <Spinner fillContainer />;
           }
 
           // GraphQL Error -- pass through the error to default NerdGraphError component
