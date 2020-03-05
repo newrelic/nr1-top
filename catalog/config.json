@@ -1,6 +1,7 @@
 {
+  "tagline": "Display and inspect the top processes of your hosts, including CPU, I/O and memory.",
   "repository": "https://github.com/newrelic/nr1-top.git",
-  "details": "Top is a simple process monitor inspired by Unix’s top command.\n Top allows you to easily see and understand the CPU, I/O and memory of the processes on a given host.",
+  "details": "Top is a simple process monitor inspired by Unix’s top command. \nTop allows you to easily see and understand the CPU, I/O and memory of the processes on a given host.",
   "support": {
     "issues": {
       "url": "https://github.com/newrelic/nr1-top/issues"
@@ -8,16 +9,9 @@
     "email": {
       "address": "opensource+nr1-top@newrelic.com"
     },
-    "website": {
+    "community": {
       "url": "https://discuss.newrelic.com/t/new-relic-one-top-nerdpack/82934"
     }
   },
-  "whatsNew": [
-    "fix: summary panel nrql query issues",
-    "feat: display empty state when nothing loads",
-    "feat: allow columns to scroll independantly",
-    "ci: run checkout before executing git commands so we have github.com in known_hosts",
-    "ci: add semantic-release plugins not bundled in npx",
-    "fix: respect custom timeRange fixes"
-  ]
+  "whatsNew": "- fix: summary panel nrql query issues \n - fix: spelling \n - feat: display empty state when nothing loads \n - feat: allow columns to scroll independantly \n - ci: run checkout before executing git commands so we have github.com in known_hosts \n - ci: add semantic-release plugins not bundled in npx \n - fix: Respect custom timeRange fixes"
 }
