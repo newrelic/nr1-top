@@ -1,6 +1,6 @@
 {
   "schemaType": "NERDPACK",
   "id": "9c746c95-2f9f-4c49-9861-36f5e5d2833a",
-  "displayName": "nr1-top",
-  "description": "NR1 UI Package nr1-top"
+  "displayName": "Top",
+  "description": "Display and inspect the top processes of your hosts, including CPU, I/O and memory"
 }
