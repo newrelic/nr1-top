@@ -1,3 +1,10 @@
+# [0.5.0](https://github.com/newrelic/nr1-top/compare/v0.4.2...v0.5.0) (2020-03-06)
+
+
+### Features
+
+* **catalog:** add app icon into root directory ([affc0f9](https://github.com/newrelic/nr1-top/commit/affc0f90d1ad355e615d7ccd1e3d892e1130cdf2))
+
 ## [0.4.2](https://github.com/newrelic/nr1-top/compare/v0.4.1...v0.4.2) (2020-02-19)
 
 
