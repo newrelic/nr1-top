@@ -1,9 +1,3 @@
-# Documentation
-
-[![New Relic One Catalog Project header](https://github.com/newrelic/open-source-office/raw/master/examples/categories/images/New_Relic_One_Catalog_Project.png)](https://github.com/newrelic/open-source-office/blob/master/examples/categories/index.md#nr1-catalog)
-
-![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/newrelic/nr1-top?include_prereleases) [![Snyk](https://snyk.io/test/github/newrelic/nr1-top/badge.svg)](https://snyk.io/test/github/newrelic/nr1-top)
-
 ## Description
 
 Top is a simple process monitor inspired by Unix’s `top` command.
@@ -13,10 +7,6 @@ Top allows you to easily see and understand the CPU, I/O and memory of the proce
 ## Usage
 
 Select a host and inspect the CPU, I/O and Memory of all processes running on that host.
-
-## Screenshot
-
-![Screenshot](https://github.com/newrelic/nr1-top/blob/master/catalog/screenshots/nr1-top-1.png)
 
 ## Open Source License
 
