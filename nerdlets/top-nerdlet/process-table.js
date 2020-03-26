@@ -66,14 +66,14 @@ export default class ProcessTable extends React.PureComponent {
   }
 
   async loadProcessData() {
-    let { entity, selectedPid } = this.props;
+    const { entity, selectedPid } = this.props;
     const { sortBy } = this.state;
 
     // select all of the metrics, but ensure that the first thing we select is the sorted column,
     // since NRQL sorts on the first function in FACET queries.
     const select = [METRICS[sortBy]]
       .concat(COLUMNS)
-      .map(m => m.fn)
+      .map((m) => m.fn)
       .join(', ');
 
     const nrql = `SELECT ${select} FROM ProcessSample
@@ -87,7 +87,7 @@ export default class ProcessTable extends React.PureComponent {
       formatType: 'raw',
     });
     const { facets } = data.raw;
-    const tableData = facets.map(facet => {
+    const tableData = facets.map((facet) => {
       return {
         pid: parseInt(facet.name),
         sort: facet.results[0].latest,
@@ -118,7 +118,7 @@ export default class ProcessTable extends React.PureComponent {
         <thead>
           <tr>
             <th className="center">PID</th>
-            {COLUMNS.map(column => {
+            {COLUMNS.map((column) => {
               const isSelected = sortBy == column.id;
               const className = `{$column.align || 'center'}`;
               return (
@@ -149,7 +149,7 @@ export default class ProcessTable extends React.PureComponent {
           </tr>
         </thead>
         <tbody>
-          {tableData.map(row => {
+          {tableData.map((row) => {
             const className =
               parseInt(selectedPid) == parseInt(row.pid) ? 'selected' : '';
             return (
@@ -159,7 +159,7 @@ export default class ProcessTable extends React.PureComponent {
                 onClick={() => this.props.onSelectPid(row.pid)}
               >
                 <td className="right">{row.pid}</td>
-                {COLUMNS.map(column => {
+                {COLUMNS.map((column) => {
                   return (
                     <td className={column.align || 'right'} key={column.id}>
                       {row[column.id]}

@@ -90,7 +90,7 @@ export default class ProcessDetails extends React.PureComponent {
           return (
             <Stack verticalType={Stack.VERTICAL_TYPE.CENTER}>
               <StackItem>Child Processes: </StackItem>
-              {members.map(pid => this.renderProcessLink(pid))}
+              {members.map((pid) => this.renderProcessLink(pid))}
             </Stack>
           );
         }}
@@ -101,7 +101,7 @@ export default class ProcessDetails extends React.PureComponent {
   renderSummaryPanel() {
     const { entity } = this.props;
     const select = ['commandLine', 'commandName', 'parentProcessId']
-      .map(s => `latest(${s}) as ${s}`)
+      .map((s) => `latest(${s}) as ${s}`)
       .join(', ');
     const nrql = this.summaryPanelQuery(select);
 
@@ -114,7 +114,7 @@ export default class ProcessDetails extends React.PureComponent {
 
           // GraphQL Error -- pass through the error to default NerdGraphError component
           if (error || !data.actor.account.nrql) {
-            console.debug('Bad NRQL Query: ' + nrql + ': ');
+            console.debug(`Bad NRQL Query: ${nrql}: `);
             return (
               <div style={{ marginBottom: '10px' }}>
                 <NerdGraphError error={error} />
@@ -140,9 +140,9 @@ export default class ProcessDetails extends React.PureComponent {
             );
           }
 
-          const commandLine = results.commandLine,
-            commandName = results.commandName,
-            parentPid = results.parentProcessId;
+          const commandLine = results.commandLine;
+          const commandName = results.commandName;
+          const parentPid = results.parentProcessId;
 
           return (
             <div className="summary-panel">

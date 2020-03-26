@@ -27,7 +27,7 @@ export default class TopNerdlet extends React.Component {
                   heading="No entity found"
                   description="This Nerdpack must be run on a monitored host with the New Relic Infrastructure agent deployed on it. Please select a host that meets that criteria."
                   buttonText=""
-                ></EmptyState>
+                />
               </div>
             );
           }
