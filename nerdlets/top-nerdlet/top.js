@@ -1,10 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Grid, GridItem, Spinner } from 'nr1';
 
 import ProcessTable from './process-table';
 import ProcessDetails from './process-details';
 
 export default class Top extends React.PureComponent {
+  static propTypes = {
+    entity: PropTypes.object,
+  };
+
   constructor(props) {
     super(props);
 

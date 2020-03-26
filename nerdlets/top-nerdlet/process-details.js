@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Stack,
   StackItem,
@@ -15,6 +16,13 @@ import { NerdGraphError, timeRangeToNrql } from '@newrelic/nr1-community';
 import get from 'lodash.get';
 
 export default class ProcessDetails extends React.PureComponent {
+  static propTypes = {
+    onSelectPid: PropTypes.func,
+    entity: PropTypes.object,
+    launcherUrlState: PropTypes.object,
+    pid: PropTypes.number,
+  };
+
   metricQuery(select, suffix = 'TIMESERIES') {
     const { entity, pid, launcherUrlState } = this.props;
     return `SELECT ${select} FROM ProcessSample WHERE entityGuid='${
@@ -45,7 +53,7 @@ export default class ProcessDetails extends React.PureComponent {
   }
 
   renderProcessLink(pid) {
-    if (!pid || pid == 'null') {
+    if (!pid || pid === null) {
       return (
         <StackItem key="none">
           <Button
@@ -85,7 +93,7 @@ export default class ProcessDetails extends React.PureComponent {
 
           // if there are no children, add a "null" child process, which will
           // result in us displaying "<em>none</em>"
-          if (members.length == 0) members.push(null);
+          if (members.length === 0) members.push(null);
 
           return (
             <Stack verticalType={Stack.VERTICAL_TYPE.CENTER}>
@@ -99,7 +107,6 @@ export default class ProcessDetails extends React.PureComponent {
   }
 
   renderSummaryPanel() {
-    const { entity } = this.props;
     const select = ['commandLine', 'commandName', 'parentProcessId']
       .map((s) => `latest(${s}) as ${s}`)
       .join(', ');
@@ -114,6 +121,7 @@ export default class ProcessDetails extends React.PureComponent {
 
           // GraphQL Error -- pass through the error to default NerdGraphError component
           if (error || !data.actor.account.nrql) {
+            // eslint-disable-next-line no-console
             console.debug(`Bad NRQL Query: ${nrql}: `);
             return (
               <div style={{ marginBottom: '10px' }}>

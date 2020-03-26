@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { NrqlQuery, Spinner, Icon } from 'nr1';
 
 import bytesToSize from '../common/bytes-to-size';
@@ -41,6 +42,13 @@ const COLUMNS = [
 ];
 
 export default class ProcessTable extends React.PureComponent {
+  static propTypes = {
+    onSelectPid: PropTypes.func,
+    entity: PropTypes.object,
+    launcherUrlState: PropTypes.object,
+    selectedPid: PropTypes.number,
+  };
+
   constructor(props) {
     super(props);
 
@@ -52,17 +60,17 @@ export default class ProcessTable extends React.PureComponent {
     this.interval = setInterval(() => this.loadProcessData(), 15000);
   }
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
   componentDidUpdate({ entity, launcherUrlState }) {
     if (
-      entity != this.props.entity ||
-      launcherUrlState != this.props.launcherUrlState
+      entity !== this.props.entity ||
+      launcherUrlState !== this.props.launcherUrlState
     ) {
       this.loadProcessData();
     }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   async loadProcessData() {
@@ -111,7 +119,7 @@ export default class ProcessTable extends React.PureComponent {
 
     if (!tableData) return <Spinner />;
 
-    if (tableData.length == 0) return 'No Process Sample data for this host.';
+    if (tableData.length === 0) return 'No Process Sample data for this host.';
 
     return (
       <table className="process-table">
@@ -119,7 +127,7 @@ export default class ProcessTable extends React.PureComponent {
           <tr>
             <th className="center">PID</th>
             {COLUMNS.map((column) => {
-              const isSelected = sortBy == column.id;
+              const isSelected = sortBy === column.id;
               const className = `{$column.align || 'center'}`;
               return (
                 <th
@@ -151,7 +159,7 @@ export default class ProcessTable extends React.PureComponent {
         <tbody>
           {tableData.map((row) => {
             const className =
-              parseInt(selectedPid) == parseInt(row.pid) ? 'selected' : '';
+              parseInt(selectedPid) === parseInt(row.pid) ? 'selected' : '';
             return (
               <tr
                 key={row.pid}
