@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { EntityByGuidQuery, Spinner } from 'nr1';
+import { EntityByGuidQuery } from 'nr1';
 import { EmptyState } from '@newrelic/nr1-community';
 
 import Top from './top';
@@ -15,7 +15,7 @@ export default class TopNerdlet extends React.Component {
     const { entityGuid } = this.props.nerdletUrlState;
     return (
       <EntityByGuidQuery entityGuid={entityGuid}>
-        {({ loading, error, data }) => {
+        {({ loading, data }) => {
           if (loading) return <div />;
           const entity = data.entities[0];
           if (entity) {
@@ -27,7 +27,7 @@ export default class TopNerdlet extends React.Component {
                   heading="No entity found"
                   description="This Nerdpack must be run on a monitored host with the New Relic Infrastructure agent deployed on it. Please select a host that meets that criteria."
                   buttonText=""
-                ></EmptyState>
+                />
               </div>
             );
           }
