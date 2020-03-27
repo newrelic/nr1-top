@@ -1,3 +1,10 @@
+## [0.5.1](https://github.com/newrelic/nr1-top/compare/v0.5.0...v0.5.1) (2020-03-27)
+
+
+### Bug Fixes
+
+* upgrade deps and setup/format project with eslint-plugin-newrelic ([#28](https://github.com/newrelic/nr1-top/issues/28)) ([7427c04](https://github.com/newrelic/nr1-top/commit/7427c045331c8bba2e27a492ba4654ab3a12b3e1))
+
 # [0.5.0](https://github.com/newrelic/nr1-top/compare/v0.4.2...v0.5.0) (2020-03-06)
 
 
