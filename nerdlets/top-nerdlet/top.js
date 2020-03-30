@@ -34,7 +34,7 @@ export default class Top extends React.PureComponent {
           </header>
           <div className="primary-column-main">
             <PlatformStateContext>
-              {platformUrlState => (
+              {(platformUrlState) => (
                 <ProcessTable
                   entity={entity}
                   platformUrlState={platformUrlState}
@@ -49,7 +49,7 @@ export default class Top extends React.PureComponent {
         <GridItem columnSpan={5} className="column secondary-column">
           {selectedPid ? (
             <PlatformStateContext>
-              {platformUrlState => (
+              {(platformUrlState) => (
                 <ProcessDetails
                   entity={entity}
                   platformUrlState={platformUrlState}
@@ -59,7 +59,6 @@ export default class Top extends React.PureComponent {
                 />
               )}
             </PlatformStateContext>
-
           ) : (
             <Spinner />
           )}

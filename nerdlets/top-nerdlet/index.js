@@ -4,7 +4,6 @@ import { EmptyState, NerdGraphError } from '@newrelic/nr1-community';
 import Top from './top';
 
 export default class TopNerdlet extends React.PureComponent {
-
   constructor(props) {
     super(props);
   }
@@ -42,4 +41,3 @@ export default class TopNerdlet extends React.PureComponent {
     );
   }
 }
-
