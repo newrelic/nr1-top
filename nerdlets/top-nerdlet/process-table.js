@@ -45,7 +45,7 @@ export default class ProcessTable extends React.PureComponent {
   static propTypes = {
     onSelectPid: PropTypes.func,
     entity: PropTypes.object,
-    launcherUrlState: PropTypes.object,
+    platformUrlState: PropTypes.object,
     selectedPid: PropTypes.number,
   };
 
@@ -60,10 +60,10 @@ export default class ProcessTable extends React.PureComponent {
     this.interval = setInterval(() => this.loadProcessData(), 15000);
   }
 
-  componentDidUpdate({ entity, launcherUrlState }) {
+  componentDidUpdate({ entity, platformUrlState }) {
     if (
       entity !== this.props.entity ||
-      launcherUrlState !== this.props.launcherUrlState
+      platformUrlState !== this.props.platformUrlState
     ) {
       this.loadProcessData();
     }
