@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid, GridItem, Spinner } from 'nr1';
+import { Grid, GridItem, Spinner, PlatformStateContext } from 'nr1';
 
 import ProcessTable from './process-table';
 import ProcessDetails from './process-details';
@@ -33,22 +33,32 @@ export default class Top extends React.PureComponent {
             <p className="subtitle">Refreshes every 15 seconds</p>
           </header>
           <div className="primary-column-main">
-            <ProcessTable
-              entity={entity}
-              selectedPid={selectedPid}
-              onSelectPid={this.selectPid}
-              {...this.props}
-            />
+            <PlatformStateContext>
+              {(platformUrlState) => (
+                <ProcessTable
+                  entity={entity}
+                  platformUrlState={platformUrlState}
+                  selectedPid={selectedPid}
+                  onSelectPid={this.selectPid}
+                  {...this.props}
+                />
+              )}
+            </PlatformStateContext>
           </div>
         </GridItem>
         <GridItem columnSpan={5} className="column secondary-column">
           {selectedPid ? (
-            <ProcessDetails
-              entity={entity}
-              pid={selectedPid}
-              onSelectPid={this.selectPid}
-              {...this.props}
-            />
+            <PlatformStateContext>
+              {(platformUrlState) => (
+                <ProcessDetails
+                  entity={entity}
+                  platformUrlState={platformUrlState}
+                  pid={selectedPid}
+                  onSelectPid={this.selectPid}
+                  {...this.props}
+                />
+              )}
+            </PlatformStateContext>
           ) : (
             <Spinner />
           )}

@@ -19,26 +19,26 @@ export default class ProcessDetails extends React.PureComponent {
   static propTypes = {
     onSelectPid: PropTypes.func,
     entity: PropTypes.object,
-    launcherUrlState: PropTypes.object,
+    platformUrlState: PropTypes.object,
     pid: PropTypes.number,
   };
 
   metricQuery(select, suffix = 'TIMESERIES') {
-    const { entity, pid, launcherUrlState } = this.props;
+    const { entity, pid, platformUrlState } = this.props;
     return `SELECT ${select} FROM ProcessSample WHERE entityGuid='${
       entity.guid
     }' AND processId=${pid} ${suffix} ${timeRangeToNrql({
-      timeRange: launcherUrlState.timeRange,
+      timeRange: platformUrlState.timeRange,
     })}`;
   }
 
   summaryPanelQuery(select) {
-    const { entity, pid, launcherUrlState } = this.props;
+    const { entity, pid, platformUrlState } = this.props;
 
     const nrql = `SELECT ${select} FROM ProcessSample WHERE entityGuid='${
       entity.guid
     }' AND processId=${pid} ${timeRangeToNrql({
-      timeRange: launcherUrlState.timeRange,
+      timeRange: platformUrlState.timeRange,
     })}`;
 
     return `{
