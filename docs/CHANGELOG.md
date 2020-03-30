@@ -1,3 +1,11 @@
+## [0.5.2](https://github.com/newrelic/nr1-top/compare/v0.5.1...v0.5.2) (2020-03-30)
+
+
+### Bug Fixes
+
+* eslint fixes. ([4cc55dc](https://github.com/newrelic/nr1-top/commit/4cc55dcfbe18590cdaedb76f8618fb5ee8361626))
+* Improving usage of state contexts. Closes newrelic/nr1-top[#21](https://github.com/newrelic/nr1-top/issues/21). Also fix dev dependencies. ([aeb8552](https://github.com/newrelic/nr1-top/commit/aeb85525b797e56d796feda2f7de36506597d4b3))
+
 ## [0.5.1](https://github.com/newrelic/nr1-top/compare/v0.5.0...v0.5.1) (2020-03-27)
 
 
