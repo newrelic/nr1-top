@@ -2,6 +2,9 @@
   "uuid": "ca3fa44c-79b2-4f52-93f7-e39dd7996f50",
   "private": true,
   "name": "nr1-top",
+  "bugs": {
+    "email": "opensource+nr1-top@newrelic.com"
+  },
   "description": "NR1 UI Package nr1-top",
   "version": "0.6.0",
   "scripts": {
