@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "Fri Mar 27 2020 14:24:02 GMT+0000 (Coordinated Universal Time)",
+  "lastUpdated": "Fri May 29 2020 17:51:46 GMT+0000 (Coordinated Universal Time)",
   "projectName": "nr1-top",
   "projectUrl": "https://github.com/newrelic/nr1-top",
   "includeDev": true,
@@ -16,19 +16,6 @@
       "licenseTextSource": "file",
       "publisher": "newrelic"
     },
-    "eslint@6.8.0": {
-      "name": "eslint",
-      "version": "6.8.0",
-      "range": "^6.8.0",
-      "licenses": "MIT",
-      "repoUrl": "https://github.com/eslint/eslint",
-      "versionedRepoUrl": "https://github.com/eslint/eslint/tree/v6.8.0",
-      "licenseFile": "node_modules/eslint/LICENSE",
-      "licenseUrl": "https://github.com/eslint/eslint/blob/v6.8.0/LICENSE",
-      "licenseTextSource": "file",
-      "publisher": "Nicholas C. Zakas",
-      "email": "nicholas+npm@nczconsulting.com"
-    },
     "lodash.get@4.4.2": {
       "name": "lodash.get",
       "version": "4.4.2",
@@ -42,18 +29,6 @@
       "publisher": "John-David Dalton",
       "email": "john.david.dalton@gmail.com",
       "url": "http://allyoucanleet.com/"
-    },
-    "prettier@2.0.2": {
-      "name": "prettier",
-      "version": "2.0.2",
-      "range": "^2.0.2",
-      "licenses": "MIT",
-      "repoUrl": "https://github.com/prettier/prettier",
-      "versionedRepoUrl": "https://github.com/prettier/prettier/tree/v2.0.2",
-      "licenseFile": "node_modules/prettier/LICENSE",
-      "licenseUrl": "https://github.com/prettier/prettier/blob/v2.0.2/LICENSE",
-      "licenseTextSource": "file",
-      "publisher": "James Long"
     },
     "prop-types@15.7.2": {
       "name": "prop-types",
@@ -140,6 +115,31 @@
       "licenseTextSource": "file",
       "publisher": "Sebastian McKenzie",
       "email": "sebmck@gmail.com"
+    },
+    "eslint@6.8.0": {
+      "name": "eslint",
+      "version": "6.8.0",
+      "range": "^6.8.0",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/eslint/eslint",
+      "versionedRepoUrl": "https://github.com/eslint/eslint/tree/v6.8.0",
+      "licenseFile": "node_modules/eslint/LICENSE",
+      "licenseUrl": "https://github.com/eslint/eslint/blob/v6.8.0/LICENSE",
+      "licenseTextSource": "file",
+      "publisher": "Nicholas C. Zakas",
+      "email": "nicholas+npm@nczconsulting.com"
+    },
+    "prettier@2.0.2": {
+      "name": "prettier",
+      "version": "2.0.2",
+      "range": "^2.0.2",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/prettier/prettier",
+      "versionedRepoUrl": "https://github.com/prettier/prettier/tree/v2.0.2",
+      "licenseFile": "node_modules/prettier/LICENSE",
+      "licenseUrl": "https://github.com/prettier/prettier/blob/v2.0.2/LICENSE",
+      "licenseTextSource": "file",
+      "publisher": "James Long"
     }
   }
 }
