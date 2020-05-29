@@ -17,8 +17,8 @@
     "@newrelic/nr1-community": "^1.0.1",
     "lodash.get": "^4.4.2",
     "prop-types": "^15.6.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
   },
   "browserslist": [
     "last 2 versions",
