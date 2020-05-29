@@ -2,7 +2,7 @@
 
 # Top
 
-![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/newrelic/nr1-top?include_prereleases) [![Snyk](https://snyk.io/test/github/newrelic/nr1-top/badge.svg)](https://snyk.io/test/github/newrelic/nr1-top)
+![CI](https://github.com/newrelic/nr1-top/workflows/CI/badge.svg) ![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/newrelic/nr1-top?include_prereleases) [![Snyk](https://snyk.io/test/github/newrelic/nr1-top/badge.svg)](https://snyk.io/test/github/newrelic/nr1-top)
 
 ## Description
 
