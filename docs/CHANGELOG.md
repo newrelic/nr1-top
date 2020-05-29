@@ -1,3 +1,10 @@
+# [0.6.0](https://github.com/newrelic/nr1-top/compare/v0.5.2...v0.6.0) (2020-05-29)
+
+
+### Features
+
+* Switch CI to GitHub Actions ([#31](https://github.com/newrelic/nr1-top/issues/31)) ([3995737](https://github.com/newrelic/nr1-top/commit/399573712a787b58252a065f15c8733670c98a04))
+
 ## [0.5.2](https://github.com/newrelic/nr1-top/compare/v0.5.1...v0.5.2) (2020-03-30)
 
 
