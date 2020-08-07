@@ -1,3 +1,10 @@
+## [0.6.1](https://github.com/newrelic/nr1-top/compare/v0.6.0...v0.6.1) (2020-08-07)
+
+
+### Bug Fixes
+
+* upgrade @newrelic/nr1-community from 1.1.1 to 1.2.0 ([#34](https://github.com/newrelic/nr1-top/issues/34)) ([bafc877](https://github.com/newrelic/nr1-top/commit/bafc87742933f0c68f5f2079e603b57bf0e76321))
+
 # [0.6.0](https://github.com/newrelic/nr1-top/compare/v0.5.2...v0.6.0) (2020-05-29)
 
 
