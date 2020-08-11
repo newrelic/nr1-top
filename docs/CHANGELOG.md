@@ -1,3 +1,11 @@
+## [0.6.3](https://github.com/newrelic/nr1-top/compare/v0.6.2...v0.6.3) (2020-08-11)
+
+
+### Bug Fixes
+
+* updated screenshots. Trigger changelog ([cb93fd6](https://github.com/newrelic/nr1-top/commit/cb93fd62215876eb1e0f8d89697d7900e96c4b5c))
+* updated screenshots. Trigger changelog ([92225f1](https://github.com/newrelic/nr1-top/commit/92225f1758755a99f556626a1e99df3e2c17837a))
+
 ## [0.6.2](https://github.com/newrelic/nr1-top/compare/v0.6.1...v0.6.2) (2020-08-11)
 
 
