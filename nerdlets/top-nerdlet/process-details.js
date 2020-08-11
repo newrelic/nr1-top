@@ -96,7 +96,10 @@ export default class ProcessDetails extends React.PureComponent {
           if (members.length === 0) members.push(null);
 
           return (
-            <Stack verticalType={Stack.VERTICAL_TYPE.CENTER}>
+            <Stack
+              verticalType={Stack.VERTICAL_TYPE.CENTER}
+              className="summary-panel__child-processes"
+            >
               <StackItem>Child Processes: </StackItem>
               {members.map((pid) => this.renderProcessLink(pid))}
             </Stack>
