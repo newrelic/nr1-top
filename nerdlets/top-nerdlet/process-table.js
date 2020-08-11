@@ -4,6 +4,18 @@ import { NrqlQuery, Spinner, Icon } from 'nr1';
 
 import bytesToSize from '../common/bytes-to-size';
 
+const TABLE_STYLE = {
+  padding: {
+    padding: '0 0 0 20px',
+  },
+  thead: {
+    whiteSpace: 'nowrap',
+    textTransform: 'uppercase',
+    color: '#22303f',
+    paddingLeft: '20px',
+  },
+};
+
 const METRICS = {
   cpu: {
     id: 'cpu',
@@ -28,7 +40,7 @@ const METRICS = {
   command: {
     id: 'command',
     name: 'Command',
-    fn: 'latest(commandName) as command',
+    fn: 'latest(commandLine) as command',
     align: 'left',
   },
 };
@@ -125,12 +137,24 @@ export default class ProcessTable extends React.PureComponent {
       <table className="process-table">
         <thead>
           <tr>
-            <th className="center">PID</th>
+            <th style={{ ...TABLE_STYLE.thead, padding: 0 }} className="center">
+              PID
+            </th>
             {COLUMNS.map((column) => {
               const isSelected = sortBy === column.id;
-              const className = `{$column.align || 'center'}`;
+              const className = `${column.align || 'center'}`;
+              let style = TABLE_STYLE.thead;
+
+              if (className === 'center') {
+                style = {
+                  ...style,
+                  padding: 0,
+                };
+              }
+
               return (
                 <th
+                  style={style}
                   className={className}
                   key={column.id}
                   onClick={() => {
@@ -169,7 +193,11 @@ export default class ProcessTable extends React.PureComponent {
                 <td className="right">{row.pid}</td>
                 {COLUMNS.map((column) => {
                   return (
-                    <td className={column.align || 'right'} key={column.id}>
+                    <td
+                      style={TABLE_STYLE.padding}
+                      className={column.align || 'right'}
+                      key={column.id}
+                    >
                       {row[column.id]}
                     </td>
                   );

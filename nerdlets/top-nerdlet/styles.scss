@@ -9,14 +9,16 @@
 .summary-panel {
   border-bottom: 2px #eeeeee solid;
   padding: 4px 8px;
-  height: 100px;
+
+  &__child-processes {
+    flex-wrap: wrap;
+  }
 }
 
 .subtitle {
   margin-top: -12px;
   margin-bottom: 10px;
   color: #aaaaaa;
-  // font-style: italic;
 }
 
 h1 {
@@ -98,8 +100,6 @@ table.process-table {
 }
 
 .process-details {
-  height: 100%;
-  overflow: hidden;
   padding-right: 8px;
 
   .chart {
@@ -114,8 +114,9 @@ table.process-table {
 }
 
 .process-details-main {
-  height: 100%;
-  overflow: scroll;
+  &:last-child {
+    margin-bottom: 20px;
+  }
 }
 
 .primary-grid {
@@ -123,12 +124,16 @@ table.process-table {
   overflow: hidden;
 }
 
-[class*='GridItem'].column {
-  height: 100%;
-  overflow: hidden;
+.primary-column {
+  overflow: auto !important;
+}
+
+.secondary-column {
+  overflow-y: auto !important;
 }
 
 .primary-column-main {
-  height: 100%;
-  overflow: scroll;
+  &:last-child {
+    margin-bottom: 20px;
+  }
 }
