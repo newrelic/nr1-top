@@ -1,3 +1,10 @@
+## [0.6.2](https://github.com/newrelic/nr1-top/compare/v0.6.1...v0.6.2) (2020-08-11)
+
+
+### Bug Fixes
+
+* scroll top processes and prcess details ([046249e](https://github.com/newrelic/nr1-top/commit/046249e66f55322edbe7d280d8259990e2c12ec6))
+
 ## [0.6.1](https://github.com/newrelic/nr1-top/compare/v0.6.0...v0.6.1) (2020-08-07)
 
 
