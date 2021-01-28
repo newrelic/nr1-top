@@ -167,10 +167,6 @@ export default class ProcessTable extends React.PureComponent {
                   {isSelected && (
                     <Icon
                       style={{ marginLeft: '6px' }}
-                      sizeType={
-                        Icon.SIZE_TYPE
-                          .INTERFACE__CARET__CARET_BOTTOM__WEIGHT_BOLD__SIZE_8
-                      }
                       color="#aaaaaa"
                       type="interface_caret_caret-bottom_weight-bold"
                     />
