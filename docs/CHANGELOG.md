@@ -1,3 +1,13 @@
+## [0.6.4](https://github.com/newrelic/nr1-top/compare/v0.6.3...v0.6.4) (2021-02-02)
+
+
+### Bug Fixes
+
+* Update depecated props on nr1 Icon ([4232267](https://github.com/newrelic/nr1-top/commit/4232267585bf0029015f8e5af1cb7cd57d4347aa))
+* update master branch to main ([7873408](https://github.com/newrelic/nr1-top/commit/7873408fe7a3ab075d61728975f6738b4f444d9a))
+* update package-lock.json ([d47524e](https://github.com/newrelic/nr1-top/commit/d47524eedcc220d48a285bceeb32b183a182cff1))
+* update semantic-release to generate release on main ([92d2414](https://github.com/newrelic/nr1-top/commit/92d241464e9573e506add6da0a66325c83c8c88e))
+
 ## [0.6.3](https://github.com/newrelic/nr1-top/compare/v0.6.2...v0.6.3) (2020-08-11)
 
 
