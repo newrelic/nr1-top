@@ -1,3 +1,10 @@
+## [0.6.5](https://github.com/newrelic/nr1-top/compare/v0.6.4...v0.6.5) (2021-03-23)
+
+
+### Bug Fixes
+
+* removed code of conduct ([ee02dcd](https://github.com/newrelic/nr1-top/commit/ee02dcdb4f08de90e6cf98fd72f5591c4fe03687))
+
 ## [0.6.4](https://github.com/newrelic/nr1-top/compare/v0.6.3...v0.6.4) (2021-02-02)
 
 
