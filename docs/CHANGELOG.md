@@ -1,3 +1,10 @@
+# [0.7.0](https://github.com/newrelic/nr1-top/compare/v0.6.5...v0.7.0) (2021-10-04)
+
+
+### Features
+
+* update semantic release with node ([64e2111](https://github.com/newrelic/nr1-top/commit/64e2111002104ef8d20e28d2ebeb876747a45e9e))
+
 ## [0.6.5](https://github.com/newrelic/nr1-top/compare/v0.6.4...v0.6.5) (2021-03-23)
 
 
