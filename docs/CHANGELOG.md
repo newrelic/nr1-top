@@ -1,3 +1,10 @@
+# [0.8.0](https://github.com/newrelic/nr1-top/compare/v0.7.0...v0.8.0) (2021-10-18)
+
+
+### Features
+
+* add whats inside screenshots for nerdlet and launcher ([aeeabae](https://github.com/newrelic/nr1-top/commit/aeeabae7bc462fb8f991363ed679c2174711dd93))
+
 # [0.7.0](https://github.com/newrelic/nr1-top/compare/v0.6.5...v0.7.0) (2021-10-04)
 
 
