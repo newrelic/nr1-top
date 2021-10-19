@@ -1,3 +1,10 @@
+## [0.8.1](https://github.com/newrelic/nr1-top/compare/v0.8.0...v0.8.1) (2021-10-19)
+
+
+### Bug Fixes
+
+* deprecated platform parameters ([76dbf58](https://github.com/newrelic/nr1-top/commit/76dbf587be097cd9e8dafdba11e6bf2080055c81))
+
 # [0.8.0](https://github.com/newrelic/nr1-top/compare/v0.7.0...v0.8.0) (2021-10-18)
 
 
