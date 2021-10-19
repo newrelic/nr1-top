@@ -3,6 +3,12 @@
   "id": "top-nerdlet",
   "displayName": "Top",
   "description": "",
-  "actionCategory": "troubleshoot",
-  "entities": [{ "domain": "INFRA", "type": "HOST" }]
+  "context": {
+    "entities": [
+      {
+        "domain": "INFRA",
+        "type": "HOST"
+      }
+    ]
+  }
 }
