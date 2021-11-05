@@ -1,3 +1,10 @@
+# [0.9.0](https://github.com/newrelic/nr1-top/compare/v0.8.1...v0.9.0) (2021-11-05)
+
+
+### Features
+
+* add catalog keywords and categoryTerms ([cee8f04](https://github.com/newrelic/nr1-top/commit/cee8f0446092ae1b642384e321a12e0f25bf5c08))
+
 ## [0.8.1](https://github.com/newrelic/nr1-top/compare/v0.8.0...v0.8.1) (2021-10-19)
 
 
