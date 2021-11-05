@@ -2,6 +2,8 @@
   "tagline": "Inspect your top processes",
   "repository": "https://github.com/newrelic/nr1-top.git",
   "details": "Top is a simple process monitor inspired by Unix’s top command. \nTop allows you to easily see and understand the CPU, I/O and memory of the processes on a given host.",
+  "categoryTerms": ["os", "infrastructure"],
+  "keywords": ["infrastructure"],
   "support": {
     "issues": {
       "url": "https://github.com/newrelic/nr1-top/issues"
