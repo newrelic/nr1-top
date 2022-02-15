@@ -1,3 +1,10 @@
+# [0.10.0](https://github.com/newrelic/nr1-top/compare/v0.9.0...v0.10.0) (2022-02-15)
+
+
+### Features
+
+* update to node 16 and fix deprecations ([ddcdd61](https://github.com/newrelic/nr1-top/commit/ddcdd615aba4676aa78d754165d9a838554c0ba5))
+
 # [0.9.0](https://github.com/newrelic/nr1-top/compare/v0.8.1...v0.9.0) (2021-11-05)
 
 
