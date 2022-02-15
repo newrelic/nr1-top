@@ -1,6 +1,6 @@
 {
   "schemaType": "NERDPACK",
-  "id": "fd71c932-0d45-4439-bffd-2dcee2076b69",
-  "displayName": "Task",
+  "id": "b9616a2a-9543-4162-8e9f-30dbb50c5cba",
+  "displayName": "Top",
   "description": "Display and inspect the top processes of your hosts, including CPU, I/O and memory"
 }

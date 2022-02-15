@@ -86,7 +86,7 @@ export default class ProcessDetails extends React.PureComponent {
       WHERE entityGuid = '${entity.guid}' AND parentProcessId = ${pid}`;
 
     return (
-      <NrqlQuery accountIds={[entity.accountId]} query={nrql} formatType="raw">
+      <NrqlQuery accountId={entity.accountId} query={nrql} formatType="raw">
         {({ loading, data }) => {
           if (loading) return '';
           const { members } = data.results[0];
@@ -186,7 +186,7 @@ export default class ProcessDetails extends React.PureComponent {
         <h3>{title}</h3>
         <ChartType
           className="chart"
-          accountIds={[entity.accountId]}
+          accountId={entity.accountId}
           query={this.metricQuery(select)}
         />
       </StackItem>
@@ -210,7 +210,7 @@ export default class ProcessDetails extends React.PureComponent {
                 'CPU',
                 "average(cpuSystemPercent) as 'System CPU %', average(cpuUserPercent) AS 'User CPU %'"
               )}
-              {this.render(
+              {this.renderChart(
                 LineChart,
                 'I/O',
                 "average(ioReadBytesPerSecond/1024/1024) AS 'Read MB/s', average(ioWriteBytesPerSecond/1024/1024) AS 'Write MB/s'"

@@ -102,11 +102,11 @@ export default class ProcessTable extends React.PureComponent {
       SINCE ${Math.round(new Date().getTime() / 1000) - 60}`;
 
     const { data } = await NrqlQuery.query({
-      accountIds: [entity.accountId],
+      accountId: entity.accountId,
       query: nrql,
       formatType: 'raw',
     });
-    const { facets } = data;
+    const { facets } = data.raw;
     const tableData = facets.map((facet) => {
       return {
         pid: parseInt(facet.name),
@@ -168,9 +168,7 @@ export default class ProcessTable extends React.PureComponent {
                     <Icon
                       style={{ marginLeft: '6px' }}
                       color="#aaaaaa"
-                      type={
-                        Icon.TYPE.INTERFACE__CARET__CARET_BOTTOM__WEIGHT_BOLD
-                      }
+                      type="interface_caret_caret-bottom_weight-bold"
                     />
                   )}
                 </th>

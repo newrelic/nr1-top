@@ -33,7 +33,7 @@ export default class Top extends React.PureComponent {
             <p className="subtitle">Refreshes every 15 seconds</p>
           </header>
           <div className="primary-column-main">
-            <PlatformStateContext.Consumer>
+            <PlatformStateContext>
               {(platformUrlState) => (
                 <ProcessTable
                   entity={entity}
@@ -43,12 +43,12 @@ export default class Top extends React.PureComponent {
                   {...this.props}
                 />
               )}
-            </PlatformStateContext.Consumer>
+            </PlatformStateContext>
           </div>
         </GridItem>
         <GridItem columnSpan={5} className="column secondary-column">
           {selectedPid ? (
-            <PlatformStateContext.Consumer>
+            <PlatformStateContext>
               {(platformUrlState) => (
                 <ProcessDetails
                   entity={entity}
@@ -58,7 +58,7 @@ export default class Top extends React.PureComponent {
                   {...this.props}
                 />
               )}
-            </PlatformStateContext.Consumer>
+            </PlatformStateContext>
           ) : (
             <Spinner />
           )}
