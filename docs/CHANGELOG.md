@@ -1,3 +1,10 @@
+## [0.10.1](https://github.com/newrelic/nr1-top/compare/v0.10.0...v0.10.1) (2022-02-15)
+
+
+### Reverts
+
+* Revert "feat: update to node 16 and fix deprecations" ([a55fdbb](https://github.com/newrelic/nr1-top/commit/a55fdbb4ca5aeaa4ca912088b36a116afbf26e56))
+
 # [0.10.0](https://github.com/newrelic/nr1-top/compare/v0.9.0...v0.10.0) (2022-02-15)
 
 
