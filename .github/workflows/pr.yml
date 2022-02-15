@@ -19,7 +19,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v1
         with:
-          node-version: 10.x
+          node-version: 16
 
       - name: Cache node_modules
         id: cache-node-modules
@@ -31,7 +31,6 @@ jobs:
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-${{ env.cache-name }}-
-
       - name: Install Dependencies
         run: npm ci
 
@@ -41,7 +40,6 @@ jobs:
       - name: NR1 Nerdpack Build
         run: |
           nr1 nerdpack:build
-
   eslint:
     name: eslint
     needs: checkout-and-build-pr
@@ -53,7 +51,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v1
         with:
-          node-version: 10.x
+          node-version: 16
 
       - name: Cache node_modules
         id: cache-node-modules
@@ -65,7 +63,6 @@ jobs:
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-${{ env.cache-name }}-
-
       - name: Install Dependencies
         run: npm ci
 
@@ -87,7 +84,6 @@ jobs:
         run: |
           echo "::error::eslint-check failed. View output of _Run eslint-check and generate report_ step"
           exit 1
-
   test:
     name: test
     needs: checkout-and-build-pr
@@ -99,7 +95,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v1
         with:
-          node-version: 10.x
+          node-version: 16
 
       - name: Cache node_modules
         id: cache-node-modules
@@ -111,7 +107,6 @@ jobs:
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-${{ env.cache-name }}-
-
       - name: Install Dependencies
         run: npm ci
 
@@ -132,7 +127,6 @@ jobs:
       - name: Install NR1 CLI
         run: |
           curl -s https://cli.nr-ext.net/installer.sh | sudo bash
-
       - name: Validate Nerdpack Schema
         run: |
           nr1 nerdpack:validate
