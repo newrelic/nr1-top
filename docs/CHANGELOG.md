@@ -1,3 +1,10 @@
+# [0.11.0](https://github.com/newrelic/nr1-top/compare/v0.10.1...v0.11.0) (2022-02-16)
+
+
+### Features
+
+* node bump to 16 and fix deprecations ([11ec54b](https://github.com/newrelic/nr1-top/commit/11ec54ba90c0646e476e83161700953e106d2974))
+
 ## [0.10.1](https://github.com/newrelic/nr1-top/compare/v0.10.0...v0.10.1) (2022-02-15)
 
 
