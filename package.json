@@ -6,7 +6,7 @@
     "email": "opensource+nr1-top@newrelic.com"
   },
   "description": "NR1 UI Package nr1-top",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "scripts": {
     "start": "nr1 nerdpack:serve",
     "test": "exit 0",

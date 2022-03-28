@@ -1,3 +1,10 @@
+## [0.11.1](https://github.com/newrelic/nr1-top/compare/v0.11.0...v0.11.1) (2022-03-28)
+
+
+### Bug Fixes
+
+* wrong fn called triggering max. call stack err ([1fb6dde](https://github.com/newrelic/nr1-top/commit/1fb6dde65dc1fb985b0634135d316c2c02f6229d))
+
 # [0.11.0](https://github.com/newrelic/nr1-top/compare/v0.10.1...v0.11.0) (2022-02-16)
 
 
