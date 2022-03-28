@@ -12,14 +12,12 @@ export default class Top extends React.PureComponent {
 
   constructor(props) {
     super(props);
-
     this.state = { selectedPid: null };
-    this.selectPid = this.selectPid.bind(this);
   }
 
-  selectPid(pid) {
+  selectPid = (pid) => {
     this.setState({ selectedPid: pid });
-  }
+  };
 
   render() {
     const { entity } = this.props;
