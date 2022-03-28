@@ -210,7 +210,7 @@ export default class ProcessDetails extends React.PureComponent {
                 'CPU',
                 "average(cpuSystemPercent) as 'System CPU %', average(cpuUserPercent) AS 'User CPU %'"
               )}
-              {this.render(
+              {this.renderChart(
                 LineChart,
                 'I/O',
                 "average(ioReadBytesPerSecond/1024/1024) AS 'Read MB/s', average(ioWriteBytesPerSecond/1024/1024) AS 'Write MB/s'"
