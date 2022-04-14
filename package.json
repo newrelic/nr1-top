@@ -16,7 +16,7 @@
   "dependencies": {
     "@newrelic/nr1-community": "^1.2.0",
     "lodash.get": "^4.4.2",
-    "prop-types": "^15.6.2",
+    "prop-types": "^15.8.1",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
   },
