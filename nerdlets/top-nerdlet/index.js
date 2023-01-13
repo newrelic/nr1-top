@@ -1,6 +1,11 @@
 import React from 'react';
-import { EntityByGuidQuery, NerdletStateContext, Spinner } from 'nr1';
-import { EmptyState, NerdGraphError } from '@newrelic/nr1-community';
+import {
+  EmptyState,
+  EntityByGuidQuery,
+  NerdletStateContext,
+  Spinner,
+} from 'nr1';
+import { NerdGraphError } from '@newrelic/nr1-community';
 import Top from './top';
 
 export default class TopNerdlet extends React.PureComponent {
@@ -25,13 +30,16 @@ export default class TopNerdlet extends React.PureComponent {
                 return <Top entity={entity} />;
               } else {
                 return (
-                  <div className="empty-state-container">
-                    <EmptyState
-                      heading="No entity found"
-                      description="This Nerdpack must be run on a monitored host with the New Relic Infrastructure agent deployed on it. Please select a host that meets that criteria."
-                      buttonText=""
-                    />
-                  </div>
+                  <EmptyState
+                    fullHeight
+                    fullWidth
+                    iconType={
+                      EmptyState.ICON_TYPE
+                        .HARDWARE_AND_SOFTWARE__SOFTWARE__ALL_ENTITIES
+                    }
+                    title="No entity found"
+                    description="This Nerdpack must be run on a monitored host with the New Relic Infrastructure agent deployed on it. Please select a host that meets that criteria."
+                  />
                 );
               }
             }}
