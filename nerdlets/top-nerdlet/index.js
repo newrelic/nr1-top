@@ -38,7 +38,7 @@ export default class TopNerdlet extends React.PureComponent {
                         .HARDWARE_AND_SOFTWARE__SOFTWARE__ALL_ENTITIES
                     }
                     title="No entity found"
-                    description="This Nerdpack must be run on a monitored host with the New Relic Infrastructure agent deployed on it. Please select a host that meets that criteria."
+                    description="This nerdpack is not enabled for the selected account - please choose an entity from an enabled account, or ask your New Relic admin to enable this nerdpack for this account."
                   />
                 );
               }
