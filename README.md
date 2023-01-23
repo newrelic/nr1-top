@@ -4,6 +4,10 @@
 
 ![CI](https://github.com/newrelic/nr1-top/workflows/CI/badge.svg) ![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/newrelic/nr1-top?include_prereleases) [![Snyk](https://snyk.io/test/github/newrelic/nr1-top/badge.svg)](https://snyk.io/test/github/newrelic/nr1-top)
 
+<a href="https://github.com/newrelic?q=nrlabs-viz&amp;type=all&amp;language=&amp;sort="><img src="https://user-images.githubusercontent.com/1786630/214122263-7a5795f6-f4e3-4aa0-b3f5-2f27aff16098.png" height=50 /></a>
+
+This application is maintained by the New Relic Labs team. Connect with us directly by [creating issues](../../issues) or [starting a discussion](../../discussions) in this repo.
+
 ## Description
 
 Top is a simple process monitor inspired by Unix’s `top` command.
