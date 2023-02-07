@@ -12,7 +12,7 @@ import {
   Spinner,
   NerdGraphQuery
 } from 'nr1';
-import get from 'lodash.get';
+import { get } from 'lodash';
 import { timeRangeToNrql } from '../common/time-range-to-nrql';
 
 export default class ProcessDetails extends React.PureComponent {
