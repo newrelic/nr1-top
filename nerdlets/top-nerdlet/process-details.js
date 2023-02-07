@@ -10,17 +10,17 @@ import {
   BlockText,
   Button,
   Spinner,
-  NerdGraphQuery,
+  NerdGraphQuery
 } from 'nr1';
-import { NerdGraphError, timeRangeToNrql } from '@newrelic/nr1-community';
 import get from 'lodash.get';
+import { timeRangeToNrql } from '../common/time-range-to-nrql';
 
 export default class ProcessDetails extends React.PureComponent {
   static propTypes = {
     onSelectPid: PropTypes.func,
     entity: PropTypes.object,
     platformUrlState: PropTypes.object,
-    pid: PropTypes.number,
+    pid: PropTypes.number
   };
 
   metricQuery(select, suffix = 'TIMESERIES') {
@@ -28,7 +28,7 @@ export default class ProcessDetails extends React.PureComponent {
     return `SELECT ${select} FROM ProcessSample WHERE entityGuid='${
       entity.guid
     }' AND processId=${pid} ${suffix} ${timeRangeToNrql({
-      timeRange: platformUrlState.timeRange,
+      timeRange: platformUrlState.timeRange
     })}`;
   }
 
@@ -38,7 +38,7 @@ export default class ProcessDetails extends React.PureComponent {
     const nrql = `SELECT ${select} FROM ProcessSample WHERE entityGuid='${
       entity.guid
     }' AND processId=${pid} ${timeRangeToNrql({
-      timeRange: platformUrlState.timeRange,
+      timeRange: platformUrlState.timeRange
     })}`;
 
     return `{
@@ -126,29 +126,15 @@ export default class ProcessDetails extends React.PureComponent {
           if (error || !data.actor.account.nrql) {
             // eslint-disable-next-line no-console
             console.debug(`Bad NRQL Query: ${nrql}: `);
-            return (
-              <div style={{ marginBottom: '10px' }}>
-                <NerdGraphError error={error} />
-              </div>
-            );
+            throw new Error(error);
           }
 
           const results = get(data, 'actor.account.nrql.results[0]');
 
           // Failed to get results for whatever reason - show friendly message to user
           if (!results) {
-            return (
-              <div style={{ marginBottom: '10px' }}>
-                <NerdGraphError
-                  showDetails={false}
-                  error={{
-                    stack: '',
-                    graphQLErrors: '',
-                    message: 'Error: Failed to retrieve process summary',
-                  }}
-                />
-              </div>
-            );
+            // eslint-disable-next-line no-console
+            console.debug('Error: Failed to retrieve process summary');
           }
 
           const commandLine = results.commandLine;
