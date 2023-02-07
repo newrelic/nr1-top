@@ -1,7 +1,7 @@
 {
   "schemaType": "NERDLET",
   "id": "top-nerdlet",
-  "displayName": "Top",
+  "displayName": "Top Local",
   "description": "",
   "context": {
     "entities": [
