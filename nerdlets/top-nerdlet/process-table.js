@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-no-bind */
-/* eslint-disable no-undef */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -10,7 +9,8 @@ import {
   TableHeaderCell,
   TableRow,
   TableRowCell,
-  MetricTableRowCell
+  MetricTableRowCell,
+  SectionMessage
 } from 'nr1';
 
 const METRICS = {
@@ -114,7 +114,9 @@ const ProcessTable = ({ entity, selectedPid, onSelectPid }) => {
           if (loading) return <Spinner />;
           const tableData = parseData(data);
           if (tableData.length === 0)
-            return 'No Process Sample data for this host.';
+            return (
+              <SectionMessage description="No Process Sample data for this host." />
+            );
 
           if (!selectedPid) onSelectPid(tableData[0].pid);
 
