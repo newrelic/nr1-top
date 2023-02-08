@@ -152,22 +152,36 @@ const ProcessTable = ({ entity, selectedPid, onSelectPid }) => {
                   </TableHeaderCell>
                 ))}
               </TableHeader>
-              {({ item }) => (
-                <TableRow>
-                  <TableRowCell>{item.pid}</TableRowCell>
-                  {COLUMNS.map((column, idx) =>
-                    column.cellType === 'metric' ? (
-                      <MetricTableRowCell
-                        key={idx}
-                        type={column.dataType}
-                        value={item[column.id]}
-                      />
-                    ) : (
-                      <TableRowCell key={idx}>{item[column.id]}</TableRowCell>
-                    )
-                  )}
-                </TableRow>
-              )}
+              {({ item }) => {
+                const selected = item.pid === selectedPid;
+                const selectedBackground = {
+                  backgroundColor: 'rgb(237,250,252)'
+                };
+                return (
+                  <TableRow onClick={() => onSelectPid(item.pid)}>
+                    <TableRowCell style={selected && selectedBackground}>
+                      {item.pid}
+                    </TableRowCell>
+                    {COLUMNS.map((column, idx) =>
+                      column.cellType === 'metric' ? (
+                        <MetricTableRowCell
+                          key={idx}
+                          style={selected && selectedBackground}
+                          type={column.dataType}
+                          value={item[column.id]}
+                        />
+                      ) : (
+                        <TableRowCell
+                          style={selected && selectedBackground}
+                          key={idx}
+                        >
+                          {item[column.id]}
+                        </TableRowCell>
+                      )
+                    )}
+                  </TableRow>
+                );
+              }}
             </Table>
           );
         }}
