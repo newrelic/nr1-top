@@ -110,8 +110,19 @@ const ProcessTable = ({ entity, selectedPid, onSelectPid }) => {
   return (
     <>
       <NerdGraphQuery query={getQuery(entity)} pollInterval={15000}>
-        {({ data, loading }) => {
+        {({ data, loading, error }) => {
           if (loading) return <Spinner />;
+          if (error?.graphQLErrors) {
+            return (
+              <SectionMessage
+                type={SectionMessage.TYPE.CRITICAL}
+                title="Error requesting data"
+                description={error?.graphQLErrors.map(e => (
+                  <div>{e.message}</div>
+                ))}
+              />
+            );
+          }
           const tableData = parseData(data);
           if (tableData.length === 0)
             return (
