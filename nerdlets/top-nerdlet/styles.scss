@@ -1,104 +1,55 @@
-.column {
-  background-color: white;
-  margin-left: 4px;
-  padding: 6px;
+.primary-grid {
+  display: flex;
+  height: 100%;
+  width: 100%;
 }
+
+.primary-column {
+  width: 66%;
+  height: 100%;
+  padding: 6px 0;
+  position: relative;
+  right: -15px; // position over the phantom action table column
+}
+
+.secondary-column {
+  width: 34%;
+  height: 100%;
+  padding: 6px 0;
+  position: relative;
+  left: -17px; // position over the phantom action table column
+}
+
+.subtitle {
+  color: #aaaaaa;
+}
+
 .summary-panel {
-  border-bottom: 2px #eeeeee solid;
-  padding: 4px 8px;
+  border-bottom: 1px #eeeeee solid;
+  padding-bottom: 7px;
   &__child-processes {
     flex-wrap: wrap;
   }
 }
-.subtitle {
-  margin-top: -12px;
-  margin-bottom: 10px;
-  color: #aaaaaa;
-}
-h1 {
-  margin-bottom: 8px;
-  font-size: 21px;
-  font-weight: 400;
-}
-table.process-table {
-  width: 100%;
-  font-size: 14px;
-  thead {
-    background-color: #222222;
-    color: white;
-    th {
-      padding-left: 2px;
-      padding-right: 2px;
-      text-align: center;
-      &:hover {
-        cursor: pointer;
-      }
-    }
-    .selected {
-      background-color: #222222;
-      color: white;
-    }
-  }
-  tbody {
-    font-family: 'Courier New', Courier, monospace;
-    cursor: pointer;
-    tr:nth-child(even) {
-      background-color: #f4f4f4;
-    }
-    tr:hover {
-      background-color: azure;
-    }
-    tr.selected {
-      border: 1px solid #b3e2ff;
-      padding: -1px;
-      td {
-        background-color: #e9f4fb;
-      }
-    }
-    td {
-      padding-left: 2px;
-      padding-right: 2px;
-      font-size: 16px;
-    }
-  }
-  .left {
-    text-align: left;
-  }
-  .right {
-    text-align: right;
-  }
-  .center {
-    text-align: center;
-  }
-}
+
 .process-details {
-  padding-right: 8px;
-  .chart {
-    height: 180px;
-    width: 100%;
+  .chart-group {
+    display: flex;
+    flex-wrap: wrap;
+    .chart {
+      height: 200px;
+      width: 100%;
+      padding: 0 1rem 1rem 1rem;
+      margin: 1rem 0;
+
+      .title {
+        padding-bottom: 0.75rem;
+      }
+    }
   }
-  & > [class*='wnd-Stack'] {
-    height: 100%;
-    overflow: hidden;
-  }
 }
-.process-details-main {
-  &:last-child {
-    margin-bottom: 20px;
-  }
-}
-.primary-grid {
-  height: 100%;
-  overflow: hidden;
-}
-.primary-column {
-  overflow: auto !important;
-}
-.secondary-column {
-  overflow-y: auto !important;
-}
-.primary-column-main {
-  &:last-child {
-    margin-bottom: 20px;
-  }
+
+// hide the phantom action column from the processes table
+[class*='--lastColumn'] {
+  display: none;
 }

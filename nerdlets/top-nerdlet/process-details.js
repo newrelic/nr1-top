@@ -8,8 +8,10 @@ import {
   ChartGroup,
   NrqlQuery,
   BlockText,
+  HeadingText,
   Button,
   Spinner,
+  Spacing,
   NerdGraphQuery
 } from 'nr1';
 import { get } from 'lodash';
@@ -101,7 +103,7 @@ export default class ProcessDetails extends React.PureComponent {
               className="summary-panel__child-processes"
             >
               <StackItem>Child Processes: </StackItem>
-              {members.map((pid) => this.renderProcessLink(pid))}
+              {members.map(pid => this.renderProcessLink(pid))}
             </Stack>
           );
         }}
@@ -111,7 +113,7 @@ export default class ProcessDetails extends React.PureComponent {
 
   renderSummaryPanel() {
     const select = ['commandLine', 'commandName', 'parentProcessId']
-      .map((s) => `latest(${s}) as ${s}`)
+      .map(s => `latest(${s}) as ${s}`)
       .join(', ');
     const nrql = this.summaryPanelQuery(select);
 
@@ -122,7 +124,6 @@ export default class ProcessDetails extends React.PureComponent {
             return <Spinner fillContainer />;
           }
 
-          // GraphQL Error -- pass through the error to default NerdGraphError component
           if (error || !data.actor.account.nrql) {
             // eslint-disable-next-line no-console
             console.debug(`Bad NRQL Query: ${nrql}: `);
@@ -143,14 +144,19 @@ export default class ProcessDetails extends React.PureComponent {
 
           return (
             <div className="summary-panel">
-              <StackItem>
-                <h2>{commandName}</h2>
-              </StackItem>
-              <StackItem>
+              <HeadingText>{commandName}</HeadingText>
+              <Spacing
+                type={[
+                  Spacing.TYPE.MEDIUM,
+                  Spacing.TYPE.OMIT,
+                  Spacing.TYPE.OMIT,
+                  Spacing.TYPE.OMIT
+                ]}
+              >
                 <BlockText>
                   Command Line: <code>{commandLine}</code>
                 </BlockText>
-              </StackItem>
+              </Spacing>
               <StackItem>
                 <Stack verticalType={Stack.VERTICAL_TYPE.CENTER}>
                   <StackItem>Parent Process: </StackItem>
@@ -168,14 +174,17 @@ export default class ProcessDetails extends React.PureComponent {
   renderChart(ChartType, title, select) {
     const { entity } = this.props;
     return (
-      <StackItem>
-        <h3>{title}</h3>
+      <div className="chart">
+        <HeadingText className="title" type={HeadingText.TYPE.HEADING_6}>
+          {title}
+        </HeadingText>
         <ChartType
-          className="chart"
+          fullHeight
+          fullWidth
           accountIds={[entity.accountId]}
           query={this.metricQuery(select)}
         />
-      </StackItem>
+      </div>
     );
   }
 
@@ -185,34 +194,28 @@ export default class ProcessDetails extends React.PureComponent {
         {this.renderSummaryPanel()}
 
         <ChartGroup>
-          <Stack
-            directionType={Stack.DIRECTION_TYPE.VERTICAL}
-            horizontalType={Stack.HORIZONTAL_TYPE.FILL}
-            fullWidth
-          >
-            <div className="process-details-main">
-              {this.renderChart(
-                AreaChart,
-                'CPU',
-                "average(cpuSystemPercent) as 'System CPU %', average(cpuUserPercent) AS 'User CPU %'"
-              )}
-              {this.renderChart(
-                LineChart,
-                'I/O',
-                "average(ioReadBytesPerSecond/1024/1024) AS 'Read MB/s', average(ioWriteBytesPerSecond/1024/1024) AS 'Write MB/s'"
-              )}
-              {this.renderChart(
-                AreaChart,
-                'Resident Memory',
-                "average(memoryResidentSizeBytes) AS 'Resident'"
-              )}
-              {this.renderChart(
-                AreaChart,
-                'Virtual Memory',
-                "average(memoryVirtualSizeBytes) AS 'Virtual'"
-              )}
-            </div>
-          </Stack>
+          <div className="chart-group">
+            {this.renderChart(
+              AreaChart,
+              'CPU',
+              "average(cpuSystemPercent) as 'System CPU %', average(cpuUserPercent) AS 'User CPU %'"
+            )}
+            {this.renderChart(
+              LineChart,
+              'I/O',
+              "average(ioReadBytesPerSecond/1024/1024) AS 'Read MB/s', average(ioWriteBytesPerSecond/1024/1024) AS 'Write MB/s'"
+            )}
+            {this.renderChart(
+              AreaChart,
+              'Resident Memory',
+              "average(memoryResidentSizeBytes) AS 'Resident'"
+            )}
+            {this.renderChart(
+              AreaChart,
+              'Virtual Memory',
+              "average(memoryVirtualSizeBytes) AS 'Virtual'"
+            )}
+          </div>
         </ChartGroup>
       </div>
     );
