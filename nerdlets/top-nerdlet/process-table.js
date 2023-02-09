@@ -46,7 +46,8 @@ const METRICS = {
     id: 'command',
     name: 'Command',
     fn: 'latest(commandLine) as command',
-    width: '4fr'
+    width: '3fr',
+    ellipsis: TableRowCell.ELLIPSIS_TYPE.LEFT
   }
 };
 
@@ -118,6 +119,7 @@ const ProcessTable = ({ entity, selectedPid, onSelectPid }) => {
                 type={SectionMessage.TYPE.CRITICAL}
                 title="Error requesting data"
                 description={error?.graphQLErrors.map(e => (
+                  // eslint-disable-next-line react/jsx-key
                   <div>{e.message}</div>
                 ))}
               />
@@ -189,6 +191,9 @@ const ProcessTable = ({ entity, selectedPid, onSelectPid }) => {
                         <TableRowCell
                           style={selected && selectedBackground}
                           key={idx}
+                          ellipsisType={
+                            column.ellipsis || TableRowCell.ELLIPSIS_TYPE.RIGHT
+                          }
                         >
                           {item[column.id]}
                         </TableRowCell>
