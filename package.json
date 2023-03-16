@@ -19,8 +19,8 @@
     "not dead"
   ],
   "dependencies": {
-    "@newrelic/nr-labs-components": "^1.3.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "@newrelic/nr-labs-components": "^1.4.0"
   },
   "devDependencies": {
     "@newrelic/eslint-plugin-newrelic": "^0.3.1",
