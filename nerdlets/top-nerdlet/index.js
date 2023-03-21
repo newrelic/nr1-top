@@ -66,6 +66,10 @@ const TopNerdlet = () => {
       <HelpModal
         isModalOpen={helpModalOpen}
         setModalOpen={setHelpModalOpen}
+        about={{
+          appName: 'Top',
+          blurb: `A simple process monitor inspired by Unix’s top command, Top allows you to easily see and understand the CPU, I/O and memory of the processes on a given host.`
+        }}
         urls={{
           docs: 'https://github.com/newrelic/nr1-top#readme',
           createIssue:
