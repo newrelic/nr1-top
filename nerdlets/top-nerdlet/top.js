@@ -26,7 +26,7 @@ export default class Top extends React.PureComponent {
 
     return (
       <>
-        <Messages repo="nr1-top" branch="dev" />
+        <Messages repo="nr1-top" />
         <div className="primary-grid">
           <div className="primary-column">
             <HeadingText>Top Processes</HeadingText>
