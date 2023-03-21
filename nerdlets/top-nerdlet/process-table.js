@@ -118,6 +118,7 @@ const ProcessTable = ({ entity, selectedPid, onSelectPid }) => {
               <SectionMessage
                 type={SectionMessage.TYPE.CRITICAL}
                 title="Error requesting data"
+                style={{ width: '90%' }}
                 description={error?.graphQLErrors.map(e => (
                   // eslint-disable-next-line react/jsx-key
                   <div>{e.message}</div>
@@ -134,75 +135,84 @@ const ProcessTable = ({ entity, selectedPid, onSelectPid }) => {
           if (!selectedPid) onSelectPid(tableData[0].pid);
 
           return (
-            <Table items={tableData}>
-              <TableHeader>
-                <TableHeaderCell
-                  sortable
-                  sortingType={
-                    sortColumn === 0
-                      ? sortingType
-                      : TableHeaderCell.SORTING_TYPE.NONE
-                  }
-                  value={({ item }) => item.pid}
-                  onClick={handleSort.bind(this, 0)}
-                >
-                  PID
-                </TableHeaderCell>
-                {COLUMNS.map((column, idx) => (
+            <div
+              style={{
+                height: '94%',
+                overflow: 'scroll',
+                transform: 'scaleX(-1)'
+              }}
+            >
+              <Table style={{ transform: 'scaleX(-1)' }} items={tableData}>
+                <TableHeader>
                   <TableHeaderCell
-                    alignmentType={
-                      column.cellType === 'metric' &&
-                      TableHeaderCell.ALIGNMENT_TYPE.RIGHT
-                    }
-                    key={idx}
                     sortable
                     sortingType={
-                      sortColumn === idx + 1
+                      sortColumn === 0
                         ? sortingType
                         : TableHeaderCell.SORTING_TYPE.NONE
                     }
-                    value={({ item }) => item[column.id]}
-                    width={column.width || '1fr'}
-                    onClick={handleSort.bind(this, idx + 1)}
+                    value={({ item }) => item.pid}
+                    onClick={handleSort.bind(this, 0)}
                   >
-                    {column.name}
+                    PID
                   </TableHeaderCell>
-                ))}
-              </TableHeader>
-              {({ item }) => {
-                const selected = item.pid === selectedPid;
-                const selectedBackground = {
-                  backgroundColor: 'rgb(237,250,252)'
-                };
-                return (
-                  <TableRow onClick={() => onSelectPid(item.pid)}>
-                    <TableRowCell style={selected && selectedBackground}>
-                      {item.pid}
-                    </TableRowCell>
-                    {COLUMNS.map((column, idx) =>
-                      column.cellType === 'metric' ? (
-                        <MetricTableRowCell
-                          key={idx}
-                          style={selected && selectedBackground}
-                          type={column.dataType}
-                          value={item[column.id]}
-                        />
-                      ) : (
-                        <TableRowCell
-                          style={selected && selectedBackground}
-                          key={idx}
-                          ellipsisType={
-                            column.ellipsis || TableRowCell.ELLIPSIS_TYPE.RIGHT
-                          }
-                        >
-                          {item[column.id]}
-                        </TableRowCell>
-                      )
-                    )}
-                  </TableRow>
-                );
-              }}
-            </Table>
+                  {COLUMNS.map((column, idx) => (
+                    <TableHeaderCell
+                      alignmentType={
+                        column.cellType === 'metric' &&
+                        TableHeaderCell.ALIGNMENT_TYPE.RIGHT
+                      }
+                      key={idx}
+                      sortable
+                      sortingType={
+                        sortColumn === idx + 1
+                          ? sortingType
+                          : TableHeaderCell.SORTING_TYPE.NONE
+                      }
+                      value={({ item }) => item[column.id]}
+                      width={column.width || '1fr'}
+                      onClick={handleSort.bind(this, idx + 1)}
+                    >
+                      {column.name}
+                    </TableHeaderCell>
+                  ))}
+                </TableHeader>
+                {({ item }) => {
+                  const selected = item.pid === selectedPid;
+                  const selectedBackground = {
+                    backgroundColor: 'rgb(237,250,252)'
+                  };
+                  return (
+                    <TableRow onClick={() => onSelectPid(item.pid)}>
+                      <TableRowCell style={selected && selectedBackground}>
+                        {item.pid}
+                      </TableRowCell>
+                      {COLUMNS.map((column, idx) =>
+                        column.cellType === 'metric' ? (
+                          <MetricTableRowCell
+                            key={idx}
+                            style={selected && selectedBackground}
+                            type={column.dataType}
+                            value={item[column.id]}
+                          />
+                        ) : (
+                          <TableRowCell
+                            style={selected && selectedBackground}
+                            key={idx}
+                            ellipsisType={
+                              column.ellipsis ||
+                              TableRowCell.ELLIPSIS_TYPE.RIGHT
+                            }
+                          >
+                            {item[column.id]}
+                          </TableRowCell>
+                        )
+                      )}
+                    </TableRow>
+                  );
+                }}
+              </Table>
+            </div>
           );
         }}
       </NerdGraphQuery>

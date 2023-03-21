@@ -54,7 +54,7 @@ const TopNerdlet = () => {
                       EmptyState.ICON_TYPE
                         .HARDWARE_AND_SOFTWARE__SOFTWARE__ALL_ENTITIES
                     }
-                    title="No entity found"
+                    title="Entity not found"
                     description="This nerdpack is not enabled for the selected account - please choose an entity from an enabled account, or ask your New Relic admin to enable this nerdpack for this account."
                   />
                 );
@@ -66,6 +66,10 @@ const TopNerdlet = () => {
       <HelpModal
         isModalOpen={helpModalOpen}
         setModalOpen={setHelpModalOpen}
+        about={{
+          appName: 'Top',
+          blurb: `A simple process monitor inspired by Unix’s top command, Top allows you to easily see and understand the CPU, I/O and memory of the processes on a given host.`
+        }}
         urls={{
           docs: 'https://github.com/newrelic/nr1-top#readme',
           createIssue:
@@ -77,14 +81,16 @@ const TopNerdlet = () => {
         }}
         ownerBadge={{
           logo: {
-            src: 'https://drive.google.com/uc?id=1BdXVy2X34rufvG4_1BYb9czhLRlGlgsT',
+            src:
+              'https://drive.google.com/uc?id=1BdXVy2X34rufvG4_1BYb9czhLRlGlgsT',
             alt: 'New Relic Labs'
           },
           blurb: {
             text: 'This a New Relic Labs open source app.',
             link: {
               text: 'Take a look at our other repos',
-              url: 'https://github.com/newrelic?q=nrlabs-viz&type=all&language=&sort='
+              url:
+                'https://github.com/newrelic?q=nrlabs-viz&type=all&language=&sort='
             }
           }
         }}
