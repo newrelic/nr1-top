@@ -118,6 +118,7 @@ const ProcessTable = ({ entity, selectedPid, onSelectPid }) => {
               <SectionMessage
                 type={SectionMessage.TYPE.CRITICAL}
                 title="Error requesting data"
+                style={{ width: '90%' }}
                 description={error?.graphQLErrors.map(e => (
                   // eslint-disable-next-line react/jsx-key
                   <div>{e.message}</div>
