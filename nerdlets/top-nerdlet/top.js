@@ -8,7 +8,7 @@ import ProcessDetails from './process-details';
 
 export default class Top extends React.PureComponent {
   static propTypes = {
-    entity: PropTypes.object
+    entity: PropTypes.object,
   };
 
   constructor(props) {
@@ -16,7 +16,7 @@ export default class Top extends React.PureComponent {
     this.state = { selectedPid: null };
   }
 
-  selectPid = pid => {
+  selectPid = (pid) => {
     this.setState({ selectedPid: pid });
   };
 
@@ -45,7 +45,7 @@ export default class Top extends React.PureComponent {
           <div className="secondary-column">
             {selectedPid && (
               <PlatformStateContext.Consumer>
-                {platformUrlState => (
+                {(platformUrlState) => (
                   <ProcessDetails
                     entity={entity}
                     platformUrlState={platformUrlState}

@@ -12,7 +12,7 @@ import {
   Button,
   Spinner,
   Spacing,
-  NerdGraphQuery
+  NerdGraphQuery,
 } from 'nr1';
 import { get } from 'lodash';
 import { timeRangeToNrql } from '../common/time-range-to-nrql';
@@ -22,7 +22,7 @@ export default class ProcessDetails extends React.PureComponent {
     onSelectPid: PropTypes.func,
     entity: PropTypes.object,
     platformUrlState: PropTypes.object,
-    pid: PropTypes.number
+    pid: PropTypes.number,
   };
 
   metricQuery(select, suffix = 'TIMESERIES') {
@@ -30,7 +30,7 @@ export default class ProcessDetails extends React.PureComponent {
     return `SELECT ${select} FROM ProcessSample WHERE entityGuid='${
       entity.guid
     }' AND processId=${pid} ${suffix} ${timeRangeToNrql({
-      timeRange: platformUrlState.timeRange
+      timeRange: platformUrlState.timeRange,
     })}`;
   }
 
@@ -40,7 +40,7 @@ export default class ProcessDetails extends React.PureComponent {
     const nrql = `SELECT ${select} FROM ProcessSample WHERE entityGuid='${
       entity.guid
     }' AND processId=${pid} ${timeRangeToNrql({
-      timeRange: platformUrlState.timeRange
+      timeRange: platformUrlState.timeRange,
     })}`;
 
     return `{
@@ -103,7 +103,7 @@ export default class ProcessDetails extends React.PureComponent {
               className="summary-panel__child-processes"
             >
               <StackItem>Child Processes: </StackItem>
-              {members.map(pid => this.renderProcessLink(pid))}
+              {members.map((pid) => this.renderProcessLink(pid))}
             </Stack>
           );
         }}
@@ -113,7 +113,7 @@ export default class ProcessDetails extends React.PureComponent {
 
   renderSummaryPanel() {
     const select = ['commandLine', 'commandName', 'parentProcessId']
-      .map(s => `latest(${s}) as ${s}`)
+      .map((s) => `latest(${s}) as ${s}`)
       .join(', ');
     const nrql = this.summaryPanelQuery(select);
 
@@ -150,7 +150,7 @@ export default class ProcessDetails extends React.PureComponent {
                   Spacing.TYPE.MEDIUM,
                   Spacing.TYPE.OMIT,
                   Spacing.TYPE.OMIT,
-                  Spacing.TYPE.OMIT
+                  Spacing.TYPE.OMIT,
                 ]}
               >
                 <BlockText>

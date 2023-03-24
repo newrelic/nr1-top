@@ -5,7 +5,7 @@ import {
   NerdletStateContext,
   Spinner,
   nerdlet,
-  Icon
+  Icon,
 } from 'nr1';
 import { HelpModal } from '@newrelic/nr-labs-components';
 import Top from './top';
@@ -24,9 +24,9 @@ const TopNerdlet = () => {
           hint: 'Quick links to get support',
           type: 'primary',
           iconType: Icon.TYPE.INTERFACE__INFO__HELP,
-          onClick: () => setHelpModalOpen(true)
-        }
-      ]
+          onClick: () => setHelpModalOpen(true),
+        },
+      ],
     });
   }, []);
 
@@ -68,7 +68,7 @@ const TopNerdlet = () => {
         setModalOpen={setHelpModalOpen}
         about={{
           appName: 'Top',
-          blurb: `A simple process monitor inspired by Unix’s top command, Top allows you to easily see and understand the CPU, I/O and memory of the processes on a given host.`
+          blurb: `A simple process monitor inspired by Unix’s top command, Top allows you to easily see and understand the CPU, I/O and memory of the processes on a given host.`,
         }}
         urls={{
           docs: 'https://github.com/newrelic/nr1-top#readme',
@@ -77,22 +77,20 @@ const TopNerdlet = () => {
           createFeature:
             'https://github.com/newrelic/nr1-top/issues/new?assignees=&labels=enhancement%2C+needs-triage&template=enhancement.md&title=',
           createQuestion:
-            'https://github.com/newrelic/nr1-top/discussions/new/choose'
+            'https://github.com/newrelic/nr1-top/discussions/new/choose',
         }}
         ownerBadge={{
           logo: {
-            src:
-              'https://drive.google.com/uc?id=1BdXVy2X34rufvG4_1BYb9czhLRlGlgsT',
-            alt: 'New Relic Labs'
+            src: 'https://drive.google.com/uc?id=1BdXVy2X34rufvG4_1BYb9czhLRlGlgsT',
+            alt: 'New Relic Labs',
           },
           blurb: {
             text: 'This a New Relic Labs open source app.',
             link: {
               text: 'Take a look at our other repos',
-              url:
-                'https://github.com/newrelic?q=nrlabs-viz&type=all&language=&sort='
-            }
-          }
+              url: 'https://github.com/newrelic?q=nrlabs-viz&type=all&language=&sort=',
+            },
+          },
         }}
       />
     </>
