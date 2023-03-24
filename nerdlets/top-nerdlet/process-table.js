@@ -10,7 +10,7 @@ import {
   TableRow,
   TableRowCell,
   MetricTableRowCell,
-  SectionMessage
+  SectionMessage,
 } from 'nr1';
 
 const METRICS = {
@@ -19,36 +19,36 @@ const METRICS = {
     name: 'CPU',
     fn: 'latest(cpuPercent) AS cpu',
     cellType: 'metric',
-    dataType: MetricTableRowCell.TYPE.PERCENTAGE
+    dataType: MetricTableRowCell.TYPE.PERCENTAGE,
   },
   io: {
     id: 'io',
     name: 'I/O',
     fn: 'latest(ioReadBytesPerSecond+ioWriteBytesPerSecond) as io',
     cellType: 'metric',
-    dataType: MetricTableRowCell.TYPE.BYTES_PER_SECOND
+    dataType: MetricTableRowCell.TYPE.BYTES_PER_SECOND,
   },
   res: {
     id: 'res',
     name: 'Res',
     fn: 'latest(memoryResidentSizeBytes) as res',
     cellType: 'metric',
-    dataType: MetricTableRowCell.TYPE.BYTES
+    dataType: MetricTableRowCell.TYPE.BYTES,
   },
   virt: {
     id: 'virt',
     name: 'Virt',
     fn: 'latest(memoryVirtualSizeBytes) as virt',
     cellType: 'metric',
-    dataType: MetricTableRowCell.TYPE.BYTES
+    dataType: MetricTableRowCell.TYPE.BYTES,
   },
   command: {
     id: 'command',
     name: 'Command',
     fn: 'latest(commandLine) as command',
     width: '3fr',
-    ellipsis: TableRowCell.ELLIPSIS_TYPE.LEFT
-  }
+    ellipsis: TableRowCell.ELLIPSIS_TYPE.LEFT,
+  },
 };
 
 const COLUMNS = [
@@ -56,17 +56,17 @@ const COLUMNS = [
   METRICS.io,
   METRICS.res,
   METRICS.virt,
-  METRICS.command
+  METRICS.command,
 ];
 
-const getQuery = entity => {
-  const select = COLUMNS.map(m => m.fn).join(', ');
+const getQuery = (entity) => {
+  const select = COLUMNS.map((m) => m.fn).join(', ');
 
   const query = `SELECT ${select} FROM ProcessSample WHERE entityGuid = '${
     entity.guid
-  }' OR hostname = '${entity.name}' FACET processId LIMIT 50 SINCE ${Math.round(
-    new Date().getTime() / 1000
-  ) - 60}`;
+  }' OR hostname = '${entity.name}' FACET processId LIMIT 50 SINCE ${
+    Math.round(new Date().getTime() / 1000) - 60
+  }`;
 
   return `{
       actor {
@@ -80,16 +80,16 @@ const getQuery = entity => {
   `;
 };
 
-const parseData = data => {
+const parseData = (data) => {
   const facets = data?.actor?.account?.nrql?.results;
-  const tableData = facets.map(facet => {
+  const tableData = facets.map((facet) => {
     return {
       pid: parseInt(facet.processId),
       cpu: facet.cpu,
       io: facet.io,
       res: facet.res,
       virt: facet.virt,
-      command: facet.command
+      command: facet.command,
     };
   });
   return tableData;
@@ -119,7 +119,7 @@ const ProcessTable = ({ entity, selectedPid, onSelectPid }) => {
                 type={SectionMessage.TYPE.CRITICAL}
                 title="Error requesting data"
                 style={{ width: '90%' }}
-                description={error?.graphQLErrors.map(e => (
+                description={error?.graphQLErrors.map((e) => (
                   // eslint-disable-next-line react/jsx-key
                   <div>{e.message}</div>
                 ))}
@@ -139,7 +139,7 @@ const ProcessTable = ({ entity, selectedPid, onSelectPid }) => {
               style={{
                 height: '94%',
                 overflow: 'scroll',
-                transform: 'scaleX(-1)'
+                transform: 'scaleX(-1)',
               }}
             >
               <Table style={{ transform: 'scaleX(-1)' }} items={tableData}>
@@ -180,7 +180,7 @@ const ProcessTable = ({ entity, selectedPid, onSelectPid }) => {
                 {({ item }) => {
                   const selected = item.pid === selectedPid;
                   const selectedBackground = {
-                    backgroundColor: 'rgb(237,250,252)'
+                    backgroundColor: 'rgb(237,250,252)',
                   };
                   return (
                     <TableRow onClick={() => onSelectPid(item.pid)}>
@@ -223,7 +223,8 @@ const ProcessTable = ({ entity, selectedPid, onSelectPid }) => {
 ProcessTable.propTypes = {
   onSelectPid: PropTypes.func,
   entity: PropTypes.object,
-  selectedPid: PropTypes.number
+  selectedPid: PropTypes.number,
 };
 
 export default ProcessTable;
+/* eslint-enable react/jsx-no-bind */
