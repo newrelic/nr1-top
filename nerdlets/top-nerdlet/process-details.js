@@ -8,12 +8,14 @@ import {
   ChartGroup,
   NrqlQuery,
   BlockText,
+  HeadingText,
   Button,
   Spinner,
+  Spacing,
   NerdGraphQuery,
 } from 'nr1';
-import { NerdGraphError, timeRangeToNrql } from '@newrelic/nr1-community';
-import get from 'lodash.get';
+import { get } from 'lodash';
+import { timeRangeToNrql } from '../common/time-range-to-nrql';
 
 export default class ProcessDetails extends React.PureComponent {
   static propTypes = {
@@ -122,33 +124,18 @@ export default class ProcessDetails extends React.PureComponent {
             return <Spinner fillContainer />;
           }
 
-          // GraphQL Error -- pass through the error to default NerdGraphError component
           if (error || !data.actor.account.nrql) {
             // eslint-disable-next-line no-console
             console.debug(`Bad NRQL Query: ${nrql}: `);
-            return (
-              <div style={{ marginBottom: '10px' }}>
-                <NerdGraphError error={error} />
-              </div>
-            );
+            throw new Error(error);
           }
 
           const results = get(data, 'actor.account.nrql.results[0]');
 
           // Failed to get results for whatever reason - show friendly message to user
           if (!results) {
-            return (
-              <div style={{ marginBottom: '10px' }}>
-                <NerdGraphError
-                  showDetails={false}
-                  error={{
-                    stack: '',
-                    graphQLErrors: '',
-                    message: 'Error: Failed to retrieve process summary',
-                  }}
-                />
-              </div>
-            );
+            // eslint-disable-next-line no-console
+            console.debug('Error: Failed to retrieve process summary');
           }
 
           const commandLine = results.commandLine;
@@ -157,14 +144,19 @@ export default class ProcessDetails extends React.PureComponent {
 
           return (
             <div className="summary-panel">
-              <StackItem>
-                <h2>{commandName}</h2>
-              </StackItem>
-              <StackItem>
+              <HeadingText>{commandName}</HeadingText>
+              <Spacing
+                type={[
+                  Spacing.TYPE.MEDIUM,
+                  Spacing.TYPE.OMIT,
+                  Spacing.TYPE.OMIT,
+                  Spacing.TYPE.OMIT,
+                ]}
+              >
                 <BlockText>
                   Command Line: <code>{commandLine}</code>
                 </BlockText>
-              </StackItem>
+              </Spacing>
               <StackItem>
                 <Stack verticalType={Stack.VERTICAL_TYPE.CENTER}>
                   <StackItem>Parent Process: </StackItem>
@@ -182,14 +174,17 @@ export default class ProcessDetails extends React.PureComponent {
   renderChart(ChartType, title, select) {
     const { entity } = this.props;
     return (
-      <StackItem>
-        <h3>{title}</h3>
+      <div className="chart">
+        <HeadingText className="title" type={HeadingText.TYPE.HEADING_6}>
+          {title}
+        </HeadingText>
         <ChartType
-          className="chart"
+          fullHeight
+          fullWidth
           accountIds={[entity.accountId]}
           query={this.metricQuery(select)}
         />
-      </StackItem>
+      </div>
     );
   }
 
@@ -199,34 +194,28 @@ export default class ProcessDetails extends React.PureComponent {
         {this.renderSummaryPanel()}
 
         <ChartGroup>
-          <Stack
-            directionType={Stack.DIRECTION_TYPE.VERTICAL}
-            horizontalType={Stack.HORIZONTAL_TYPE.FILL}
-            fullWidth
-          >
-            <div className="process-details-main">
-              {this.renderChart(
-                AreaChart,
-                'CPU',
-                "average(cpuSystemPercent) as 'System CPU %', average(cpuUserPercent) AS 'User CPU %'"
-              )}
-              {this.renderChart(
-                LineChart,
-                'I/O',
-                "average(ioReadBytesPerSecond/1024/1024) AS 'Read MB/s', average(ioWriteBytesPerSecond/1024/1024) AS 'Write MB/s'"
-              )}
-              {this.renderChart(
-                AreaChart,
-                'Resident Memory',
-                "average(memoryResidentSizeBytes) AS 'Resident'"
-              )}
-              {this.renderChart(
-                AreaChart,
-                'Virtual Memory',
-                "average(memoryVirtualSizeBytes) AS 'Virtual'"
-              )}
-            </div>
-          </Stack>
+          <div className="chart-group">
+            {this.renderChart(
+              AreaChart,
+              'CPU',
+              "average(cpuSystemPercent) as 'System CPU %', average(cpuUserPercent) AS 'User CPU %'"
+            )}
+            {this.renderChart(
+              LineChart,
+              'I/O',
+              "average(ioReadBytesPerSecond/1024/1024) AS 'Read MB/s', average(ioWriteBytesPerSecond/1024/1024) AS 'Write MB/s'"
+            )}
+            {this.renderChart(
+              AreaChart,
+              'Resident Memory',
+              "average(memoryResidentSizeBytes) AS 'Resident'"
+            )}
+            {this.renderChart(
+              AreaChart,
+              'Virtual Memory',
+              "average(memoryVirtualSizeBytes) AS 'Virtual'"
+            )}
+          </div>
         </ChartGroup>
       </div>
     );

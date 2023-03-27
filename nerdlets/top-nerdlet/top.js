@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid, GridItem, Spinner, PlatformStateContext } from 'nr1';
+import { BlockText, HeadingText, Spacing, PlatformStateContext } from 'nr1';
+import { Messages } from '@newrelic/nr-labs-components';
 
 import ProcessTable from './process-table';
 import ProcessDetails from './process-details';
@@ -24,44 +25,40 @@ export default class Top extends React.PureComponent {
     const { selectedPid } = this.state;
 
     return (
-      <Grid className="primary-grid">
-        <GridItem columnSpan={7} className="column primary-column">
-          <header className="column-header">
-            <h1>Top Processes</h1>
-            <p className="subtitle">Refreshes every 15 seconds</p>
-          </header>
-          <div className="primary-column-main">
-            <PlatformStateContext.Consumer>
-              {(platformUrlState) => (
-                <ProcessTable
-                  entity={entity}
-                  platformUrlState={platformUrlState}
-                  selectedPid={selectedPid}
-                  onSelectPid={this.selectPid}
-                  {...this.props}
-                />
-              )}
-            </PlatformStateContext.Consumer>
+      <>
+        <Messages repo="nr1-top" />
+        <div className="primary-grid">
+          <div className="primary-column">
+            <HeadingText>Top Processes</HeadingText>
+            <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.OMIT]}>
+              <BlockText className="subtitle">
+                Refreshes every 15 seconds
+              </BlockText>
+            </Spacing>
+            <ProcessTable
+              entity={entity}
+              selectedPid={selectedPid}
+              onSelectPid={this.selectPid}
+              {...this.props}
+            />
           </div>
-        </GridItem>
-        <GridItem columnSpan={5} className="column secondary-column">
-          {selectedPid ? (
-            <PlatformStateContext.Consumer>
-              {(platformUrlState) => (
-                <ProcessDetails
-                  entity={entity}
-                  platformUrlState={platformUrlState}
-                  pid={selectedPid}
-                  onSelectPid={this.selectPid}
-                  {...this.props}
-                />
-              )}
-            </PlatformStateContext.Consumer>
-          ) : (
-            <Spinner />
-          )}
-        </GridItem>
-      </Grid>
+          <div className="secondary-column">
+            {selectedPid && (
+              <PlatformStateContext.Consumer>
+                {(platformUrlState) => (
+                  <ProcessDetails
+                    entity={entity}
+                    platformUrlState={platformUrlState}
+                    pid={selectedPid}
+                    onSelectPid={this.selectPid}
+                    {...this.props}
+                  />
+                )}
+              </PlatformStateContext.Consumer>
+            )}
+          </div>
+        </div>
+      </>
     );
   }
 }

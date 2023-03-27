@@ -1,47 +1,53 @@
-import React from 'react';
+/* eslint-disable react/jsx-no-bind */
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { NrqlQuery, Spinner, Icon } from 'nr1';
-
-import bytesToSize from '../common/bytes-to-size';
-
-const TABLE_STYLE = {
-  padding: {
-    padding: '0 0 0 20px',
-  },
-  thead: {
-    whiteSpace: 'nowrap',
-    textTransform: 'uppercase',
-    color: '#22303f',
-    paddingLeft: '20px',
-  },
-};
+import {
+  NerdGraphQuery,
+  Spinner,
+  Table,
+  TableHeader,
+  TableHeaderCell,
+  TableRow,
+  TableRowCell,
+  MetricTableRowCell,
+  SectionMessage,
+} from 'nr1';
 
 const METRICS = {
   cpu: {
     id: 'cpu',
     name: 'CPU',
     fn: 'latest(cpuPercent) AS cpu',
+    cellType: 'metric',
+    dataType: MetricTableRowCell.TYPE.PERCENTAGE,
   },
   io: {
     id: 'io',
     name: 'I/O',
     fn: 'latest(ioReadBytesPerSecond+ioWriteBytesPerSecond) as io',
+    cellType: 'metric',
+    dataType: MetricTableRowCell.TYPE.BYTES_PER_SECOND,
   },
   res: {
     id: 'res',
     name: 'Res',
     fn: 'latest(memoryResidentSizeBytes) as res',
+    cellType: 'metric',
+    dataType: MetricTableRowCell.TYPE.BYTES,
   },
   virt: {
     id: 'virt',
     name: 'Virt',
     fn: 'latest(memoryVirtualSizeBytes) as virt',
+    cellType: 'metric',
+    dataType: MetricTableRowCell.TYPE.BYTES,
   },
   command: {
     id: 'command',
     name: 'Command',
     fn: 'latest(commandLine) as command',
-    align: 'left',
+    width: '3fr',
+    ellipsis: TableRowCell.ELLIPSIS_TYPE.LEFT,
   },
 };
 
@@ -53,158 +59,172 @@ const COLUMNS = [
   METRICS.command,
 ];
 
-export default class ProcessTable extends React.PureComponent {
-  static propTypes = {
-    onSelectPid: PropTypes.func,
-    entity: PropTypes.object,
-    platformUrlState: PropTypes.object,
-    selectedPid: PropTypes.number,
+const getQuery = (entity) => {
+  const select = COLUMNS.map((m) => m.fn).join(', ');
+
+  const query = `SELECT ${select} FROM ProcessSample WHERE entityGuid = '${
+    entity.guid
+  }' OR hostname = '${entity.name}' FACET processId LIMIT 50 SINCE ${
+    Math.round(new Date().getTime() / 1000) - 60
+  }`;
+
+  return `{
+      actor {
+        account(id: ${entity.accountId}) {
+          nrql(query: "${query}") {
+            results
+          }
+        }
+      }
+    }
+  `;
+};
+
+const parseData = (data) => {
+  const facets = data?.actor?.account?.nrql?.results;
+  const tableData = facets.map((facet) => {
+    return {
+      pid: parseInt(facet.processId),
+      cpu: facet.cpu,
+      io: facet.io,
+      res: facet.res,
+      virt: facet.virt,
+      command: facet.command,
+    };
+  });
+  return tableData;
+};
+
+const ProcessTable = ({ entity, selectedPid, onSelectPid }) => {
+  const [sortColumn, setSortColumn] = useState(1);
+  const [sortingType, setSortingType] = useState();
+
+  const handleSort = (column, evt, { nextSortingType }) => {
+    if (column === sortColumn) {
+      setSortingType(nextSortingType);
+    } else {
+      setSortColumn(column);
+      setSortingType(nextSortingType);
+    }
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = { sortBy: 'cpu' };
-  }
-
-  async componentDidMount() {
-    this.loadProcessData();
-    this.interval = setInterval(() => this.loadProcessData(), 15000);
-  }
-
-  componentDidUpdate({ entity, platformUrlState }) {
-    if (
-      entity !== this.props.entity ||
-      platformUrlState !== this.props.platformUrlState
-    ) {
-      this.loadProcessData();
-    }
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
-  async loadProcessData() {
-    const { entity, selectedPid } = this.props;
-    const { sortBy } = this.state;
-
-    // select all of the metrics, but ensure that the first thing we select is the sorted column,
-    // since NRQL sorts on the first function in FACET queries.
-    const select = [METRICS[sortBy]]
-      .concat(COLUMNS)
-      .map((m) => m.fn)
-      .join(', ');
-
-    const nrql = `SELECT ${select} FROM ProcessSample
-      WHERE entityGuid = '${entity.guid}' OR hostname = '${entity.name}'
-      FACET processId LIMIT 50
-      SINCE ${Math.round(new Date().getTime() / 1000) - 60}`;
-
-    const { data } = await NrqlQuery.query({
-      accountIds: [entity.accountId],
-      query: nrql,
-      formatType: 'raw',
-    });
-    const { facets } = data;
-    const tableData = facets.map((facet) => {
-      return {
-        pid: parseInt(facet.name),
-        sort: facet.results[0].latest,
-        cpu: `${Math.max(facet.results[1].latest, 0).toFixed(1)}%`,
-        io: `${bytesToSize(facet.results[2].latest)}/s`,
-        res: bytesToSize(facet.results[3].latest),
-        virt: bytesToSize(facet.results[4].latest),
-        command: facet.results[5].latest,
-      };
-    });
-
-    if (tableData.length > 0 && !selectedPid) {
-      this.props.onSelectPid(tableData[0].pid);
-    }
-    this.setState({ tableData });
-  }
-
-  render() {
-    const { tableData, sortBy } = this.state;
-    const { selectedPid } = this.props;
-
-    if (!tableData) return <Spinner />;
-
-    if (tableData.length === 0) return 'No Process Sample data for this host.';
-
-    return (
-      <table className="process-table">
-        <thead>
-          <tr>
-            <th style={{ ...TABLE_STYLE.thead, padding: 0 }} className="center">
-              PID
-            </th>
-            {COLUMNS.map((column) => {
-              const isSelected = sortBy === column.id;
-              const className = `${column.align || 'center'}`;
-              let style = TABLE_STYLE.thead;
-
-              if (className === 'center') {
-                style = {
-                  ...style,
-                  padding: 0,
-                };
-              }
-
-              return (
-                <th
-                  style={style}
-                  className={className}
-                  key={column.id}
-                  onClick={() => {
-                    this.setState({ sortBy: column.id }, () =>
-                      this.loadProcessData()
-                    );
-                  }}
-                >
-                  {column.name}
-                  {isSelected && (
-                    <Icon
-                      style={{ marginLeft: '6px' }}
-                      color="#aaaaaa"
-                      type={
-                        Icon.TYPE.INTERFACE__CARET__CARET_BOTTOM__WEIGHT_BOLD
-                      }
-                    />
-                  )}
-                </th>
-              );
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {tableData.map((row) => {
-            const className =
-              parseInt(selectedPid) === parseInt(row.pid) ? 'selected' : '';
+  return (
+    <>
+      <NerdGraphQuery query={getQuery(entity)} pollInterval={15000}>
+        {({ data, loading, error }) => {
+          if (loading) return <Spinner />;
+          if (error?.graphQLErrors) {
             return (
-              <tr
-                key={row.pid}
-                className={className}
-                onClick={() => this.props.onSelectPid(row.pid)}
-              >
-                <td className="right">{row.pid}</td>
-                {COLUMNS.map((column) => {
-                  return (
-                    <td
-                      style={TABLE_STYLE.padding}
-                      className={column.align || 'right'}
-                      key={column.id}
-                    >
-                      {row[column.id]}
-                    </td>
-                  );
-                })}
-              </tr>
+              <SectionMessage
+                type={SectionMessage.TYPE.CRITICAL}
+                title="Error requesting data"
+                style={{ width: '90%' }}
+                description={error?.graphQLErrors.map((e) => (
+                  // eslint-disable-next-line react/jsx-key
+                  <div>{e.message}</div>
+                ))}
+              />
             );
-          })}
-        </tbody>
-      </table>
-    );
-  }
-}
+          }
+          const tableData = parseData(data);
+          if (tableData.length === 0)
+            return (
+              <SectionMessage description="No Process Sample data for this host." />
+            );
+
+          if (!selectedPid) onSelectPid(tableData[0].pid);
+
+          return (
+            <div
+              style={{
+                height: '94%',
+                overflow: 'scroll',
+                transform: 'scaleX(-1)',
+              }}
+            >
+              <Table style={{ transform: 'scaleX(-1)' }} items={tableData}>
+                <TableHeader>
+                  <TableHeaderCell
+                    sortable
+                    sortingType={
+                      sortColumn === 0
+                        ? sortingType
+                        : TableHeaderCell.SORTING_TYPE.NONE
+                    }
+                    value={({ item }) => item.pid}
+                    onClick={handleSort.bind(this, 0)}
+                  >
+                    PID
+                  </TableHeaderCell>
+                  {COLUMNS.map((column, idx) => (
+                    <TableHeaderCell
+                      alignmentType={
+                        column.cellType === 'metric' &&
+                        TableHeaderCell.ALIGNMENT_TYPE.RIGHT
+                      }
+                      key={idx}
+                      sortable
+                      sortingType={
+                        sortColumn === idx + 1
+                          ? sortingType
+                          : TableHeaderCell.SORTING_TYPE.NONE
+                      }
+                      value={({ item }) => item[column.id]}
+                      width={column.width || '1fr'}
+                      onClick={handleSort.bind(this, idx + 1)}
+                    >
+                      {column.name}
+                    </TableHeaderCell>
+                  ))}
+                </TableHeader>
+                {({ item }) => {
+                  const selected = item.pid === selectedPid;
+                  const selectedBackground = {
+                    backgroundColor: 'rgb(237,250,252)',
+                  };
+                  return (
+                    <TableRow onClick={() => onSelectPid(item.pid)}>
+                      <TableRowCell style={selected && selectedBackground}>
+                        {item.pid}
+                      </TableRowCell>
+                      {COLUMNS.map((column, idx) =>
+                        column.cellType === 'metric' ? (
+                          <MetricTableRowCell
+                            key={idx}
+                            style={selected && selectedBackground}
+                            type={column.dataType}
+                            value={item[column.id]}
+                          />
+                        ) : (
+                          <TableRowCell
+                            style={selected && selectedBackground}
+                            key={idx}
+                            ellipsisType={
+                              column.ellipsis ||
+                              TableRowCell.ELLIPSIS_TYPE.RIGHT
+                            }
+                          >
+                            {item[column.id]}
+                          </TableRowCell>
+                        )
+                      )}
+                    </TableRow>
+                  );
+                }}
+              </Table>
+            </div>
+          );
+        }}
+      </NerdGraphQuery>
+    </>
+  );
+};
+
+ProcessTable.propTypes = {
+  onSelectPid: PropTypes.func,
+  entity: PropTypes.object,
+  selectedPid: PropTypes.number,
+};
+
+export default ProcessTable;
+/* eslint-enable react/jsx-no-bind */
