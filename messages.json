@@ -1,3 +1,11 @@
 {
-  "messages": []
+  "messages": [
+    {
+      "date": "2023-03-27",
+      "level": "info",
+      "title": "Release Announcement",
+      "desc": "v.0.12.0: We have just given Top a fresh coat of paint - you can read more about this release in the discussion post linked below.",
+      "link": {"label": "Learn more", "to": "https://github.com/newrelic/nr1-top/discussions"}
+    }
+  ]
 }
