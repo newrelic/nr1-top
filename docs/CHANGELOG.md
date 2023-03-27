@@ -1,3 +1,34 @@
+# [0.12.0](https://github.com/newrelic/nr1-top/compare/v0.11.1...v0.12.0) (2023-03-27)
+
+
+### Bug Fixes
+
+* add missing quotes ([cf585cb](https://github.com/newrelic/nr1-top/commit/cf585cb80e6faa88e75f41686d522b663ea39322))
+* correct display name for Top ([288e817](https://github.com/newrelic/nr1-top/commit/288e8173a596d9cf554b9be9154b5743af45df83))
+* dependencies ([fe29809](https://github.com/newrelic/nr1-top/commit/fe29809c947d54e4311fe46fa89b323b2d3a72fa))
+* lodash import ([76aa65b](https://github.com/newrelic/nr1-top/commit/76aa65b851936eace21fe80c19b357b9c57c2b09))
+
+
+### Features
+
+* add About blurb to HelpModal ([255acc6](https://github.com/newrelic/nr1-top/commit/255acc690bf4763974613578d9195872bb8dff4a))
+* add default process selection ([d5502b5](https://github.com/newrelic/nr1-top/commit/d5502b51b9c97cd23950780f47bca9940ca4a0ba))
+* add dummy message ([4cee7a4](https://github.com/newrelic/nr1-top/commit/4cee7a4d7fc9c697b0ab12b90396ff534ff21ee7))
+* add HelpModal component ([e1a5546](https://github.com/newrelic/nr1-top/commit/e1a55464ac26ae49e75c3346850f6f8676a2178c))
+* add Messages component ([a0f82ad](https://github.com/newrelic/nr1-top/commit/a0f82ad0f52bc78875a1ebcf39e4eac0d729b8f2))
+* add messages.json ([710e0c9](https://github.com/newrelic/nr1-top/commit/710e0c985b86610bd98bbc4462a3c41ebbf0888e))
+* add table scrolling ([c200625](https://github.com/newrelic/nr1-top/commit/c200625941394bb6b0c3b69b6ef72310150e6f67))
+* css for new layout ([ef2a761](https://github.com/newrelic/nr1-top/commit/ef2a76136f6247dcceb1a5c648af5a4710eb4ae4))
+* display query errors ([bc2d540](https://github.com/newrelic/nr1-top/commit/bc2d540faab2d7c5df26c3f6a138a64c7a583ab8))
+* fix spacing and heading components ([7f46c55](https://github.com/newrelic/nr1-top/commit/7f46c5551ab4830f20258b2c8264491faefa5346))
+* left-side ellipsis for command column ([f07789d](https://github.com/newrelic/nr1-top/commit/f07789d71a79f3ffab92c3ba2d64e2d6359f3cb4))
+* NR component clean up ([6cbb81a](https://github.com/newrelic/nr1-top/commit/6cbb81ab66f2cb5e21f301bbb74a748ec6d9a2a6))
+* select a process in the table ([1c2da04](https://github.com/newrelic/nr1-top/commit/1c2da046a8ed2483ec2391d1501529d071cb1ce1))
+* update empty state message ([0e35f34](https://github.com/newrelic/nr1-top/commit/0e35f34fefecb97536c7b3ffc7223dfbf8b26a08))
+* update to use New Relic EmptyState component ([ed511c0](https://github.com/newrelic/nr1-top/commit/ed511c0971f9a1cc3c471e2cc9d0751f2997fb2e))
+* update to use NR Table ([7649425](https://github.com/newrelic/nr1-top/commit/7649425d60d379073a70e5d8453ea89b76b282fe))
+* wrap no data message into SectionMessage ([cfc6f24](https://github.com/newrelic/nr1-top/commit/cfc6f243f8b8a168c24d38409da8e6edc5822dcd))
+
 ## [0.11.1](https://github.com/newrelic/nr1-top/compare/v0.11.0...v0.11.1) (2022-03-28)
 
 
